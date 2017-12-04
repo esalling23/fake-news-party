@@ -1,0 +1,214 @@
+{{!< default}}
+{{!-- 
+/**
+ * Emerging Citizens
+ * Developed by Engagement Lab, 2016
+ * ==============
+ * 
+ * Script includes partial for MODERATOR socket.io events
+ * ==========
+ */
+--}}
+
+if (jQuery.browser.mobile) {
+    showErrorModal(true, 'mobile');    
+    return;
+}
+
+var clockInterval;
+var startAnim = new TimelineLite({paused: true});
+
+socketEvents = function(eventId, eventData) {
+    
+    switch (eventId) {
+
+        case 'connect':
+
+			   // Connected, let's sign-up for to receive messages for this room
+               $('#startGameForm').css('padding', '1%');
+               
+			   socket.emit('room', emitData('moderator'));
+
+               {{#ifeq gameType "wikigeeks"}}
+                    $('.body').addClass('wikigeeks');
+               {{/ifeq}}
+               
+            break;
+
+        case 'disconnect':
+
+            console.log('--- Server disconnect: %s ---', eventData);
+
+            if(gameEnded)
+                return;
+
+            $('#error-disconnected').fadeIn(function() {
+                $('#error-disconnected #text').css('top', '0');
+            });
+
+            break;
+
+        case 'players:update':
+
+            var staticPlayers = $('.player-static');
+            var currentPlayers = _.pluck(eventData.players, 'username');
+
+            // Allow to start?
+            if(currentPlayers.length >= 2)
+                startAnim.play();
+            else
+                startAnim.reverse();
+
+                _.each(staticPlayers, function(player, index) {
+
+                    // TODO: Handle visual of players leaving mid-game
+                    // if(eventData.state === 'lost_player') {
+
+                    //     if(!currentPlayers[index]) {
+                    //         $(player).children('.icon').removeClass('active');
+                    //         $(player).children('.nameplate').removeClass('active');
+                    //     }
+
+                    // }
+                    // else {
+                        
+                        if(currentPlayers[index]) {
+
+                            var name = currentPlayers[index];
+                            var nameFormatted = (name.length <= 15) ? name : name.substring(0, 15) + "...";
+
+                            $(player).children('.nameplate').text(nameFormatted);
+
+                            if(eventData.state !== 'lost_player') {
+                                $(player).children('.icon').addClass('active');
+                                $(player).children('.nameplate').text(nameFormatted).addClass('active');
+                            }
+
+                        }
+                        else {
+
+                            $(player).children('.icon').removeClass('active');
+                            $(player).children('.nameplate').removeClass('active');
+
+                        }
+
+                    // }
+
+                });
+
+            break;
+
+        case 'game:tutorial':
+
+            $('#overlay').html(eventData).promise().done(function() {
+
+                var img = $('#tutorial_img');
+                img.load(function() {
+                    $('#loading-modal').hide();
+                    $('#overlay').show();
+
+                    TweenLite.from($('.tutorial'), 1, { autoAlpha: 0, scale: 0, ease: Elastic.easeOut })
+                });
+
+                var imgPath = img.data().src;
+                img.attr('src', imgPath.replace('[[height]]', 'h_'+window.innerHeight));
+
+                new TimelineLite({onComplete: function() {
+
+                    $('#loading-modal').show();
+            
+                    // Show countdown
+                    var secondsLeft = 8;
+                    var circle = new ProgressBar.Circle('#countdown', {
+                        color: '#fff',
+                        duration: 8000,
+                        easing: 'easeInOut',
+                        strokeWidth: 6,
+                        trailColor: '#f4f4f4',
+                        trailWidth: 0.8,
+                        fill: '#00c5c2',
+                        text: {
+                            value: '',
+                            className: 'text',
+                        }
+                    });
+
+                    $('#countdown').click(function() {
+                        $('#overlay').fadeOut();
+                    });
+
+                    var icon = $('#continue .icon').detach();
+                    $('#countdown .text').empty();
+                    icon.appendTo($('#countdown .text'));
+                    
+                    var continueAnim = new TimelineMax({ paused:true });
+                    continueAnim
+                    .from(icon, 1.5, {scale: 0, autoAlpha: 0, ease: Bounce.easeOut })
+                    .from(icon, 1, {x: '+20', repeat: -1, yoyo: true, ease: Expo.easeOut });
+                    // .to($('#countdown'), 1, {scale: 2, ease: Bounce.easeOut })
+                    // .from($('#countdown'), 1, {scale: 2, ease: Bounce.easeOut, delay: 1 });
+
+                    continueAnim.play();
+                    
+                }})
+                .to($('.room-container'), .5, {scale:0, autoAlpha:0, ease:Elastic.easeOut})
+                .to($('#top-header'), .5, {y:'-100%', ease:Elastic.easeOut})
+                .to($('.players.left, .players-left'), .5, {xPercent:-200, force3D:true, autoAlpha:0, ease:Elastic.easeInOut})
+                .to($('.players.right, .players-right'), .5, {xPercent:200, force3D:true, autoAlpha:0, ease:Elastic.easeInOut});
+            });
+
+            break;
+
+        case 'game:start':
+
+            updateGameContent(eventData.html);
+
+            break;
+
+        case 'game:ended':
+
+            gameEnded = true;
+
+            showErrorModal(true, 'ended');
+
+            break;
+            
+        case 'game:countdown':
+
+            if(clockInterval)
+                clearInterval(clockInterval);
+
+            break;
+
+        {{#ifnoteq environment "production"}}
+            case 'debug:pause':
+                countdownPaused = !countdownPaused;
+
+                break;
+        {{/ifnoteq}}
+
+        default:
+
+            console.warn('No groupview handler found for event "' + eventId + '"');
+
+            break;
+
+    }
+    
+};
+
+// Get events script for the game type logged in to
+
+    {{#ifeq environment "production"}}$.getScript( 'https://emergingcitizens.org/release/events/group/{{gameType}}.js' ){{/ifeq}}
+    {{#ifeq environment "staging"}}$.getScript( '/release/events/group/{{gameType}}.js' ){{/ifeq}}
+    {{#ifeq environment "development"}}$.getScript( '/js/events/group/{{gameType}}.js' ){{/ifeq}}
+    .done(function( script, textStatus ) {
+        var startBtn = $('#btn-start-game');
+        startAnim.from(startBtn, 1, {scale:0, autoAlpha:0, ease:Elastic.easeOut});
+    })
+{{#ifnoteq environment "production"}}
+    .fail(function( jqxhr, settings, exception ) {
+        console.error('Unable to load %s (error: "%s")', '{{gameType}}.js', exception);
+    });
+{{else}};
+{{/ifnoteq}}

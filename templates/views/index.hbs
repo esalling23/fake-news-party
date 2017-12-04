@@ -1,0 +1,49 @@
+<div class="gameLanding" id="homepage">
+  <div class="row top">
+    {{!-- TOP SECTION --}}
+    <div class="top-section">
+      
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <h2 class="left-text gray-font">Confirmation Identity</h2>
+        <h3 class="left-text white-font light">A learning platform focused on standardized content through the lens of news and social media.</h3>
+        <a href="/about"><button class="more desktop-only">Learn More</button></a>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  {{!-- GAMES --}}
+  <div class="row games-row light">
+
+    <h2 class="dark-gray-font light">Built for teachers and students alike, content is customizable and made for both group and individual play.</h2>
+    
+    <div class="col-lg-6 col-md-6 col-sm-12 col-no-padding game-col">
+      <img src="{{{cloudinaryImg content.htyi_image crop=scale height=200}}}">
+      <div id="hashtag-info" class="home-page-info current">
+        <div class="text">Teachers, get started below to guide your class through missions tailored to standardized content in your state.</div>
+        <div class="info-buttons">
+          <a id="teacher-entry">Teacher Platform</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-6 col-md-6 col-sm-12 col-no-padding game-col">
+      <img src="{{{cloudinaryImg content.wiki_image crop=scale height=200}}}">
+      <div id="geeks-info" class="home-page-info current">      
+        <div class="text">Students, get started below to play through missions on your own time or join your class in a group mission.</div>
+        <div class="info-buttons">
+          <a id="student-entry">Student Playground</a>
+        </div>
+      </div>
+    </div>
+
+  </div> {{!-- End Login Row --}}
+
+
+  {{!-- CREDITS --}}
+  <div id="credits" class="row light col-lg-7 col-sm-12 col-centered">
+    <h3 class="teal-font">Design and Development Team</h3>
+    <h4>Erica Salling</h4>
+    <p>Special thanks and credit to Johnny Richardson for his work developing Emerging Citizens for the Engagement Lab, upon which this project was built.</p>
+  </div>

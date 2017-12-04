@@ -1,0 +1,9 @@
+{
+	"name": "Group Party Game",
+	"directory": "group-party-game",
+	"database": "group-party-game",
+	"subdomain": "ec",
+	"admin_nav": { 
+						
+					}
+}

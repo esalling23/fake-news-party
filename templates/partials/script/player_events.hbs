@@ -1,0 +1,312 @@
+{{!< default}}
+{{!-- 
+/**
+ * Emerging Citizens
+ * Developed by Engagement Lab, 2016
+ * ==============
+ * 
+ * Script includes partial for PLAYERS socket.io events
+ * ==========
+ */
+--}}
+
+var cachedEventId;
+var cachedEventData;
+var gameEnded = false;
+
+var resetSession = function() {
+
+    // Remove saved game code, submission, and set to not reconnected
+    sessionStorage.removeItem('gameCode');
+    sessionStorage.removeItem('playerSubmission');
+    sessionStorage.removeItem('playerVote');
+    sessionStorage.setItem('reconnected', false);
+
+}
+
+var getScript = function(gameType) {
+
+    {{#ifeq environment "production"}}$.getScript( 'https://emergingcitizens.org/release/events/' + gameType + '.js' ){{/ifeq}}
+    {{#ifeq environment "staging"}}$.getScript( '/release/events/' + gameType + '.js' ){{/ifeq}}
+    {{#ifeq environment "development"}}$.getScript( '/js/events/' + gameType + '.js' ){{/ifeq}}
+        .done(function( script, textStatus ) {
+            // If any event is waiting to be called, do it now
+            if(cachedEventId) {                
+                socketEvents(cachedEventId, cachedEventData);
+                gameEvents(cachedEventId, cachedEventData);
+            }
+          })
+          .fail(function( jqxhr, settings, exception ) {
+            console.error('Unable to load %s (error: "%s")', gameType + '.js', exception);
+        });
+
+}
+
+$(document).on('focus', 'input, textarea', function() {
+    setTimeout(function() {
+        window.scrollTo(document.body.scrollLeft, document.body.scrollTop);
+    }, 0);
+});
+
+socketEvents = function(eventId, eventData) {
+
+    // Wait for load defined if player is reconnected, so client can load needed logic before event is called
+    if(eventData && eventData.waitForLoad)
+    {
+        cachedEventId = eventId;
+        cachedEventData = eventData.html;
+
+        return;
+    }
+
+    switch (eventId) {
+
+        case 'connect':
+            
+            if(sessionStorage.getItem('gameCode')) {
+                // Check if player is active in game
+                socket.emit('login:active', {
+                  gameId: sessionStorage.getItem('gameCode'), 
+                  username: sessionStorage.getItem('username'),
+                  uid: sessionStorage.getItem('uUID')
+                });
+            }
+
+            // Connected, let's sign-up for to receive messages for this room
+            socket.emit('room', emitData('player'));
+            
+            break;
+
+        case 'disconnect':
+
+            console.log('--- Server disconnect: %s ---', eventData);
+
+            if(gameEnded)
+                return;
+
+            // Remove saved sesh
+            resetSession();
+
+            if ($('.modal')) {
+                $('.modal').fadeOut();
+            }
+
+            $('#error-disconnected').fadeIn(function() {
+                $('#error-disconnected #text').css('top', '0');
+            });
+
+            document.title = 'Emerging Citizens';
+
+            break;
+
+        case 'player:loggedin':
+
+            updateGameContent(eventData.html, function() {
+
+                if(sessionStorage.gameType === 'wwdmm')
+                    TweenLite.from($('#waiting'), 10, { autoAlpha: 0, scale: 0, rotation: "360_cw", ease: Elastic.easeOut });
+                else if(sessionStorage.gameType === 'wikigeeks') {
+                    $('#waiting .row').css('border-radius', '140px');
+
+                    new TimelineLite()
+                    .from($('#waiting'), 3, { autoAlpha: 0, scale: 0, ease: Elastic.easeOut }, 'start')
+                    .to($('#waiting .row'), .5, { borderRadius:"0px 140px 0px 140px", ease: Expo.easeInOut }, 'start+=.01')
+                    .to($('#waiting .row'), .5, { borderRadius:"0px 0px 0px 0px", ease: Expo.easeInOut }, 'start+=.01')
+                }
+                else if(sessionStorage.gameType === 'htyi') {
+                    var cloud = $('#waiting')
+                    var yVal = -10 + Math.floor(Math.random() * (10 - -10 + 1));
+                    
+                    TweenMax.set(cloud,{transformOrigin:'50% 50%'});
+                    TweenMax.from(cloud,1,{autoAlpha:0, y:0, scale:0, ease: Back.easeOut.config(1.5)});
+                    TweenMax.fromTo(cloud,3,{yPercent:0}, {yPercent:yVal, yoyo: true, repeat: -1, ease: Sine.easeInOut});
+                    
+                }
+            });
+
+            sessionStorage.setItem('gameType', eventData.gameType);
+            sessionStorage.setItem('gameCode', eventData.gameCode);
+            sessionStorage.setItem('reconnected', false);
+
+            getScript(sessionStorage.gameType);
+
+            $('#debug-info').text('Player id: ' + eventData.id);
+
+            playerId = eventData.id;
+
+            document.title = 'EC: ' + playerName;
+
+            break;
+
+        case 'player:reconnected':
+            
+            // Get events script for the game type logged in to
+            getScript(sessionStorage.gameType);
+
+            // Set local player state as reconnected
+            sessionStorage.setItem('reconnected', true);
+
+            document.title = 'EC: ' + playerName;
+            
+            break;
+
+        case 'game:start':
+
+            // Save current game code to local storage
+            sessionStorage.setItem('gameCode', gameCode);
+
+            {{!-- updateGameContent(eventData); --}}
+
+            gameContainer.html(eventData);
+
+            // Change background
+            $('.body').addClass('player');
+
+            break;
+
+        case 'game:error':
+
+            $('#loading-modal').hide();
+            $('.form input').removeAttr('disabled');
+            $('.form input').removeClass('hidden-el');
+            $('.form .error').text(eventData);
+            $('.form .error').show();
+
+            break;
+
+        case 'game:ending':
+
+            $('#error-box').text(eventData);
+            $('#error-box').show();
+
+            break;
+
+        case 'player:inactive':
+        case 'game:ended':
+
+            gameEnded = true;
+
+            // Remove saved sesh
+            resetSession();
+
+            updateGameContent(eventData);
+                
+            // Send player back to login after 5s
+            setTimeout(function() {
+                window.location = window.location;
+            }, 5000);
+
+            document.title = 'Game ended!';
+
+            break;
+
+        case 'game:resumed':
+
+            $('#error-box').hide();
+
+            break;
+
+        case 'game:notfound':
+
+            console.log("the game was not found, sending back to login");
+
+            // Game not found, make sure form is visible
+            $('#resuming').hide();
+            $('.form').show();
+
+            // If player was in a game (has code), tell them they were disconnected/game ended
+            // Otherwise player is at login, tell them game ended
+            if(sessionStorage.getItem('gameCode')) {
+                updateGameContent(eventData);
+                
+                {{!-- // Send player back to login after 5s
+                setTimeout(function() {
+                    window.location = '/play';
+                }, 5000); --}}
+            }
+            else
+                $('.form .error').text('Game has ended, please try again.').fadeIn();
+
+                
+            // Reset saved sesh
+            resetSession();
+
+
+            break;
+
+        case 'game:countdown_ending':
+
+            $('.form .error').fadeIn().html(eventData);
+
+            break;
+
+        case 'game:round_over':
+
+            console.log("the round is over now");
+
+            if(eventData.html) {
+                updateGameContent(eventData.html, function() {
+                    var nextRoundAnim = new TimelineLite({ paused:true , onComplete:CheckLast()});
+                    nextRoundAnim.from($('#nextRound'), 2.5, { scale: 0, opacity:0, ease:Elastic.easeOut, display:'none' }, { scale: 1, opacity: 1, display: 'block'});
+                    nextRoundAnim.play();
+                    
+                });
+
+            }
+            else {
+                updateGameContent(eventData, function() {
+                    var nextRoundAnim = new TimelineLite({ paused:true , onComplete:CheckLast()});
+                    nextRoundAnim.from($('#nextRound'), 2.5, { scale: 0, opacity:0, ease:Elastic.easeOut, display:'none' }, { scale: 1, opacity: 1, display: 'block'});
+                    nextRoundAnim.play();
+                    
+                });
+            }
+
+            var CheckLast = function() {
+
+                if (eventData.data) {
+                    if (eventData.data.last_round){
+                        socket.emit('game:survey', eventData);
+                        resetSession();
+                        
+                    } else {
+                        sessionStorage.removeItem('playerSubmission');
+                    }
+                }
+            }
+
+            
+            
+
+            break;
+
+        case 'game:survey':
+
+
+            if ($('#results')) {
+                $('#results').fadeOut(function() {
+                    $('div#survey').fadeIn();
+                });
+            } else {
+                $('#survey').fadeIn();
+
+            }
+
+            break;
+
+        case 'game:end':
+        case 'players:update':
+
+            updateGameContent(eventData.html);
+
+            break;
+
+        default:
+
+            console.warn('No handler found for event "' + eventId + '" in socketEvents.');
+
+            break;
+
+    }
+
+};

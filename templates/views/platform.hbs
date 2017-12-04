@@ -1,0 +1,58 @@
+<div class="page-container platform">
+    {{this.role}} Platform Hub
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#missions" role="tab">Missions</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#dashboard" role="tab">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#curate" role="tab">Curate</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+
+        <div class="tab-pane active" id="missions" role="tabpanel">
+
+            {{#each timeSpan}}
+
+            <div class="timespan" id="{{key}}"></div>
+
+            {{/each}}
+
+            <div class="timespan-ext"></div>
+
+        </div>
+
+
+        <div class="tab-pane" id="dashboard" role="tabpanel">
+
+            <div class="start-mission">
+
+                Enter Class Code Below to Join a Mission
+
+                <input type="text" id="class-code">
+
+                <button class="btn" id="quick-start">Quick Start</button>
+
+            </div>
+
+            <div class="mission-board"></div>
+
+        </div>
+
+
+        <div class="tab-pane" id="curate" role="tabpanel">
+
+
+
+        </div>
+    </div>
+
+</div>

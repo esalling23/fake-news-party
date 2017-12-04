@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>WikiGeeks Prompt Context - Emerging Citizens</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+<!-- Styling for this page that varies from bootstrap.min.css -->
+    <style>
+    /*Import Fonts*/
+
+   	@font-face{
+    	font-family: Aileron;
+    	src: url(css/Aileron-Regular.otf);}
+  
+    @font-face{
+    	font-family: Aileron-Thin;
+    	src: url(css/Aileron-Thin.otf);}
+    @font-face{
+        font-family: OdinRounded-Regular;
+        src: url(css/OdinRoundedRegular.otf);
+    }
+    @font-face{
+        font-family: OdinRounded-Bold;
+        src: url(css/OdinRoundedBold.otf);
+    }
+    @font-face{
+        font-family: Avenir;
+        src: url(css/AvenirLTStd-Book.otf);
+    }
+/*End Fonts*/
+/*Background Image*/
+    body{
+      background-image: url("css/WG_grid_tileable.png");
+      background-repeat: repeat;
+      overflow-x: hidden;
+      padding: 0;}
+/*Background Image End*/
+#startContext{ 
+    width: 100%;
+}
+
+#topMenu{
+    width:200px;
+    margin: 0 auto;
+}
+#menuImage{
+    width:200px;
+}
+#contextPane{
+    width: 800px;
+    height: 650px;
+    background-color: white;
+    margin: 20px auto;
+}
+#startingModal{
+    width: 600px;
+    height: 500px;
+    background-color:white;
+    visibility: visible;
+    position: relative;
+    margin: 0 auto;
+    top: -600px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #f2a585;
+    visibility: hidden;
+}
+#wikiLogo{
+    background-image: url("css/wikiLogoNoText.png");
+    width: 300px;
+    height: 140px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 165px;
+    top: 40px;
+}
+#modalInstructions{
+    font-family: Aileron-Thin;
+    font-size: 18pt;
+    text-align: center;
+    color: #07e8d0;
+    position: relative;
+    top: 50px;
+}
+#countCircle{
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    background-color:#02c4c3;
+    position: relative;
+    left: 220px;
+    top: 60px;
+}
+#modalCountdown{
+    text-align: center;
+    color: white;
+    font-family: Aileron;
+    font-size: 74pt;
+    position: relative;
+    top: -5px;
+    left: -3px;
+}
+#q1{
+    width: 400px;
+    height: 325px;
+    z-index: 1;
+    position: absolute;
+    top: 40px;
+    display: inline-block;
+    left: 2%;
+}
+#pakistan{
+    background-image: url("css/pakistan.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 225px;
+    height: 225px;
+    margin: 0 auto;
+}
+#pakistanText{
+    font-family: OdinRounded-Regular;
+    font-size: 48pt;
+    text-align: center;
+    color: #fd7174;
+}
+#q3{
+    width: 400px;
+    height: 325px;
+    z-index: 1;
+    position: absolute;
+    top: 10px;
+    left: 400px;
+}
+#pinkLine{
+    background-image: url(css/divider_pink.png);
+    width: 200px;
+    height: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-left: 95px;
+    margin-top: 50px;
+}
+
+#pakistanInfo{
+    font-family: Aileron-Thin;
+    color: #07e8d0;
+    text-align: center;
+    padding: 15px;
+    top: 15px;
+    position: relative;
+}
+#q2{
+    width: 400px;
+    height: 325px;
+    z-index: 1;
+    position: absolute;
+    top: 335px;
+    left: 3%;
+}
+#instructions{
+    font-family: Avenir;
+    font-size: 24pt;
+    line-height: 1.5em;
+    text-align: center;
+    width: 325px;
+    position: relative;
+    margin: 0 auto;
+    top: 55px;
+    color: #f2a585;
+}
+#q4{
+    width: 400px;
+    height: 325px;
+    z-index: 1;
+    position: absolute;
+    top: 335px;
+    left:400px;
+}
+#timerBox{
+    background-image: url("css/timer_bounding_box.png");
+    width: 250px;
+    height: 200px;
+    top: -50px;
+    right: -67.5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
+    position: relative;
+}
+#timer{
+    font-family: OdinRounded-Bold;
+    font-size: 66pt;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+    padding: 10px;
+    top: 28%;
+    color:#FD9A06;
+
+}
+#timer1{
+    color:#fd986c;
+}
+#timerColon{
+    color:#fd986c;
+}
+#timer2{
+    color:#fd560c;
+}
+#timer3{
+    color:#FD9A06;
+}
+#linkButton{
+    width: 100%;
+}
+
+
+	</style>
+</head>
+
+<header>
+    <div id="topMenu">
+    <img id="menuImage" src="css/menu.png">
+    </div>
+</header>
+
+<body>
+<div id="startContext">
+    <div id="contextPane">
+        <div id="q1">
+            <div id="pakistan"></div>
+            <h2 id="pakistanText">Pakistan</h2>
+        </div>
+        <div id="q2">
+            <h3 id="pakistanInfo">Pakistan (Listeni/ˈpækᵻstæn/ or Listeni/pɑːkᵻˈstɑːn/), officially the Islamic Republic of Pakistan, is a country in South Asia. It is the sixth-most populous country with a population exceeding 199 million people.[13]</h3>
+        </div>
+        <div id="q3"> <h3 id="instructions"> Use your mobile device to search for a starting article based on this topic!</h3>
+        <div id="pinkLine"></div>
+        </div>
+        
+        <div id="q4">
+            
+        <h2 id="timer"><span id="timer1">0</span><span id="timerColon">:</span><span id="timer2">3</span><span id="timer3">0</span></h2>
+        <div id="timerBox"></div>
+        </div>
+    </div>
+    <div id="startingModal">
+        <div id="wikiLogo"></div>
+        <div id="modalInstructions">
+        <h2>Get Ready!</h2>
+        <h2>The target article will reveal in</h2></div>
+        <div id="countCircle">
+            <div id="modalCountdown">4</div>
+        </div>
+    </div>
+</div>
+
+<div id="targetArticle">
+</div>
+
+<div id="topThree">
+</div>
+
+<div id="leaderboard">
+</div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="jquery.modal.css" type="text/css" media="screen" />
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- GreenSock library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.3/TweenMax.min.js"></script>
+<!-- Animation JS File -->
+    <script src="GeeksContextTest.js"></script>
+</body>
+</html>

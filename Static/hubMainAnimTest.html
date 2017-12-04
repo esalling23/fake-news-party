@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Hub - Emerging Citizens</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+<!-- Styling for this page that varies from bootstrap.min.css -->
+    <style>
+/*Import Fonts*/
+
+    @font-face{
+      font-family: Aileron;
+      src: url(css/Aileron-Regular.otf);
+    }
+  
+    @font-face {
+      font-family: Aileron-Thin;
+      src: url(css/Aileron-Thin.otf);
+    }
+/*End Fonts*/
+/*Background Image*/
+    body{
+      background-image: url("css/ec_background_tileable.png");
+      background-repeat: repeat;
+      overflow-x: hidden;
+      padding:0;
+    }
+/*Background Image End*/
+/*Text Formatting*/
+    h1{
+      color: black;
+      font-size: 36pt;
+      text-align: center;
+      padding-bottom: 30px;
+      font-family: Aileron-Thin;
+      z-index: 3;
+    }
+    #room-code{
+    margin-top:15%;
+      position: relative;
+      visibility: hidden;
+      margin-bottom:0;
+      padding-bottom: 0;
+    }
+
+    #code{
+    	top: 20%;
+      position: relative;
+      font-size:72px;
+      visibility: hidden;
+    } 
+  .loginColor{
+    color: #FD7D4B;
+  }
+  .helpColor{
+    color:#FECD40;
+  }
+  .aboutColor{
+    color:#20C5C1;
+  }
+  #letter-1{
+    color:#ff6445;
+  }
+  #letter-2{
+    color:#ff8f5d;
+  }
+  #letter-3{
+    color:#fad735;
+  }
+  #letter-4{
+    color:#00cb86;
+  }
+/*End Text Formatting*/
+
+
+
+/*Element formatting*/
+    img{
+      padding-bottom: 20px;
+    }
+
+    li{
+      font-family:Aileron;
+      font-size: 12pt;
+      text-align: center;
+      margin-bottom:-10px;
+    }
+    p{
+      font-family:Aileron-Thin;
+      font-size:10pt;
+      text-align: center;
+      color:gray;
+    }
+    button{
+      width:100%;
+    }
+    div{
+      position:relative;
+      display:block;
+    }
+    h2{
+    	font-family:Aileron-Thin;
+    }
+    .btn{
+      background:none;
+      border:none;
+      transition:none;
+      text-decoration: none;
+    }
+
+    .row{
+      padding-top: 150px;
+    }
+
+    .h1Top{
+      font-family:Aileron-Thin;
+    }
+    /*Top Nav color*/
+    .navbar-inverse {
+    background-color: #FFF;
+    border-color: #080808;
+}
+#ec-logo{
+	background-image: url("css/ec_logo_ec.png");
+	background-repeat: no-repeat;
+	background-size:contain;
+	width: 256px;
+	height: 256px;
+	position: relative;
+	margin:auto;
+}
+
+#navbar{
+	position: relative;
+	left:39%;
+	right:61%;
+}
+
+/*Bottom bar color*/
+  .navbar-fixed-bottom{
+    background-color:#FB9973;
+    border-color:rgba(255, 255, 255, 0);
+  }
+  .container-bottom{
+    background-color:#FB9973;
+    border-color:rgba(255, 255, 255, 0);
+    width:100%;
+    position:relative;
+    bottom:0px;
+    height: 164px;
+  }
+  #egl-logo{
+    position: absolute;
+    margin:auto;
+    width:66%;
+    height:66%;
+    left: 47%;
+    right:53%;
+    background-image: url("css/logo_white.png");
+    background-repeat: no-repeat;
+	background-size:contain;
+  }
+  #footer-text{
+  	position:absolute;
+  	top: 60%;
+  }
+   /*End element styling*/
+#hub-container{
+	margin-bottom: 30%;
+}
+#hub-row{
+	position: relative;
+	margin-top: 9%;
+}
+
+#hashtag-info{
+	background-image: url("css/ec_logo_youreit_box.png");
+	background-repeat: no-repeat;
+	background-size:contain;
+	position: absolute;
+	width:256px;
+	height:256px;
+	left:15%;
+	right:85%;
+}
+#meme-info{
+	background-image: url("css/ec_logo_wwdmm_box.png");
+	background-repeat: no-repeat;
+	background-size:contain;
+	position: absolute;
+	width:256px;
+	height:256px;
+	left:39%;
+	right: 61%;
+}
+#geeks-info{
+	background-image: url("css/ec_logo_wiki_box.png");
+	background-repeat: no-repeat;
+	background-size:contain;
+	position:absolute;
+	width:256px;
+	height:256px;
+	left: 62%;
+	right: 38%;
+}
+
+/*Lobby Pane formatting*/
+
+  .pane-container
+  {
+    position: relative;
+    width:100%;
+    margin:auto;
+  }
+  #game-pane
+  {
+    position:absolute;
+    width:100%;
+    z-index: 2;
+    margin: auto;
+    padding: 0;
+  }
+  #pane{
+    position: absolute;
+    visibility: hidden;
+    width:50%;
+    left: 28%;
+    padding:0;
+    padding-right: 90px;
+    padding-top: 75px;
+  }
+
+  .icon-container{
+    background-image: url("css/raindrops_tileable_peach.png");
+    position:relative;
+    padding:0;
+    padding-bottom:5%;
+    width:100%;
+  }
+  .icon-row
+  {
+    padding-top: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .player-icon{
+    position:relative;
+    padding:0;
+    margin-top: 2%;
+    float:left;
+    visibility: hidden;
+    background-image: url("css/HYI_avatar_color.png");
+    background-repeat: no-repeat;
+	background-size:contain;
+	height: 128px;
+	width: 128px;
+  }
+  .left-icon{
+  	margin-left: 20%;
+  }
+  .right-icon{
+    margin-right: 20%;
+    float:right;
+  }
+  #player-icon4{
+    margin-bottom: 40px;
+  }
+  #player-icon8{
+    margin-bottom: 40px;
+  }
+/*End Lobby Pane Formatting*/
+/*Start Tweet Pane Formatting*/
+.tweet-pane-container
+  {
+    position: relative;
+    width:100%;
+    margin:auto;
+    background-image: url("css/raindrops_tileable_peach.png");
+    z-index: 1;
+    padding-bottom:8%;
+  }
+  #tweet-game-pane
+  {
+    position:absolute;
+    width:100%;
+    z-index: 2;
+    margin: auto;
+    padding: 0;
+    visibility: hidden;
+
+  }
+  #tweet-pane{
+    position: absolute;
+    width:50%;
+    padding:0;
+    padding-right: 4%;
+    padding-top: 2%;
+    left:28%;
+
+  }
+#sample-tweet{
+	position: absolute;
+	z-index:3;
+	width:40%;
+	padding-top:4%;
+	left: 31%;
+}
+#clock-face{
+	position: absolute;
+	z-index:3;
+	width: 12%;
+	visibility: hidden;
+}
+#clock-hand{
+	z-index: 4;
+	position:absolute;
+	width:11%;
+	visibility: hidden;
+	left: .5%;
+}
+#tweet-pane-stuff{
+	z-index:3;
+	padding:0;
+	position: absolute;
+	width:100%;
+	top: 100%;
+	left: 44.5%;
+}
+.tweet-player-icon{
+	position:relative;
+    padding:0;
+    margin-top: 2%;
+    float:left;
+    visibility: hidden;
+    background-image: url("css/HYI_avatar_color.png");
+    background-repeat: no-repeat;
+	background-size:contain;
+	height: 128px;
+	width: 128px;
+}
+  .tweet-icon-container{
+    position:relative;
+    padding:0;
+    width:100%;
+    visibility: hidden;
+  }
+  .left-icon{
+  	float:left;
+  }
+  .right-icon{
+    float:right;
+  }
+  #player-icon4{
+    margin-bottom: 4%;
+  }
+  #player-icon8{
+    margin-bottom: 4%;
+  }
+  #hashtagging-instructions{
+  	color: #ffa480;
+  	position: relative;
+  	z-index: 4;
+  	padding-left:2%;
+  	padding-top:14%;
+  }
+  #bold-hashtag{
+  	font-family:Aileron;
+  	font-size:60pt;
+  	position: relative;
+  	top:.15em;
+  }
+/*End Tweet Pane Formatting*/
+/*Start Hashtag Options Pane Formatting*/
+#options-container{
+	position: relative;
+    width:100%;
+    margin:0;
+    padding:0;
+    background-image: url("css/raindrops_tileable_peach.png");
+    z-index: 1;
+}
+#guess-real{
+	background-image: url("css/HYI_guessthereal.png");
+    background-repeat: no-repeat;
+	background-size:contain;
+	width: 732px;
+	height:294px;
+	margin:auto;
+	visibility:hidden;
+}
+#real-tweet-options{
+	background-image: url("css/sample_tweet.png");
+	background-repeat: no-repeat;
+	background-size:contain;
+	position: absolute;
+	width: 475px;
+	height: 150px;
+	top: 11%;
+	left:18%;
+}
+#guess-instructions{
+	color: white;
+	position:absolute;
+	font-size: 34pt;
+	top: 75%;
+	left: 4%;
+}
+#bold-real{
+	font-family: Aileron;
+	color: #cbe543;
+}
+.options-block{
+	background-color: white;
+	height: 125px;
+	width: 42%;
+	padding: 0;
+	visibility:hidden;
+}
+.options-row{
+	padding-bottom :10px;
+	padding-top:10px;
+}
+.hashtag-option{
+	position:absolute;
+	left: 29%;
+	top: 22%;
+}
+/*End Hashtag Options Pane Formatting*/
+/*Start Voting Results Formatting*/
+#results-container{
+	background-image: url("css/raindrops_tileable_peach.png");
+	background-clip: padding-box;
+	position: relative;
+    width:100%;
+    height:900px;
+    margin:0;
+    padding:0;
+}
+#real-tweet{
+	background-image: url("css/sample_tweet.png");
+	background-size:contain;
+	background-repeat: no-repeat;
+	position: relative;
+	width: 596px;
+	height: 280px;
+	z-index:2;
+	margin:auto;
+	top: -32.6%;
+	visibility: hidden;
+}
+#results-pane{
+	background-image:url("css/HYI_realtag.png");
+	position: relative;
+	width: 630px;
+	height: 385px;
+	margin:auto;
+	top:10%;
+	z-index:1;
+	visibility: hidden;
+}
+#wrong-voters-row{
+	position:relative;
+	padding:0;
+	height:256px;
+	width:27%;
+	top: -20%;
+	margin: auto;
+}
+#correct-voters-row{
+	position:absolute;
+	padding:0;
+	height:256px;
+	width:100%;
+	top: 65%;
+}
+.correct-voter{
+	background-image:url("css/HYI_avatar_color.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	height:128px;
+	width: 128px;
+	position:relative;
+	float:left;
+	left:37%;
+	right: 63%;
+	visibility: hidden;
+	z-index: 4;
+}
+#created-by{
+	position:absolute;
+	color:white;
+	left:16%;
+	top:13%;
+	z-index: 0;
+}
+#hashtag-spot{
+	position:absolute;
+	left:23%;
+	top:63%;
+	color: #ff6e54;
+}
+.wrong-voter{
+	background-image:url("css/HYI_avatar_color.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	height:128px;
+	width: 128px;
+	position:relative;
+	float:left;
+	visibility: hidden;
+	z-index:3;
+}
+
+#hashtag-author{
+	background-image:url("css/HYI_avatar_color.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	height:172px;
+	width: 172px;
+	position:absolute;
+	left: 25%;
+	top: 36%;
+	visibility: hidden;
+	z-index: 4;
+}
+/*End Voting Results Formatting*/
+/*Start Winner's Circle Formatting*/
+#winners-circle-container{
+	background-image: url("css/raindrops_tileable_peach.png");
+	background-clip: padding-box;
+	height: 725px;
+	padding-bottom: 150px;
+}
+
+#winners-header{
+	color:white;
+	font-family:Aileron;
+	font-size: 48pt;
+	display:none;
+}
+
+#header-box{
+	background-color: #ff9b6e;
+	width:30%;
+	margin:auto;
+	padding:0;
+}
+.winner-pane-text{
+	position:absolute;
+	padding:0;
+	margin:0;
+	font-family: Aileron;
+	font-size: 14pt;
+	color:black;
+	left:1.75%;
+	top:72.5%;
+	z-index: 7;
+}
+.score-text{
+	position: absolute;
+	font-family: Aileron;
+	font-size: 54pt;
+	left: 21%;
+	top: -1%;
+	color: #ffca00;
+}
+.score-mark{
+	position: absolute;
+	z-index: 5;
+	width: 215px;
+	top: 21.5%;
+	left: 15.25%;
+}
+#fake-row{
+	padding:0;
+	height:15%;
+	z-index: 0;
+	visibility:hidden;
+}
+.winner{
+
+}
+.winners-template{
+	padding:0;
+	position:relative;
+	width: 33%;
+}
+.winner-row{
+	padding:0;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height:25%;
+}
+.winner-pane{
+	padding:0;
+	position:relative;
+	width: 43%;
+	height:145%;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#winners-pane{
+	height:75%;
+}
+#winner-row-1{
+	z-index:1;
+}
+#winner-1-pane{
+	background-image: url("css/HYI_finalscoretop.png");
+	margin-left: 15%;
+	margin-right: 85%;
+	visibility: hidden;
+}
+#winner-row-2{
+	z-index:2;
+}
+#winner-2-pane{
+	background-image: url("css/HYI_finalscoremiddle.png");
+	margin-left: 40%;
+	margin-right:60%;
+	visibility: hidden;
+}
+#winner-row-3{
+	z-index:3;
+}
+#winner-3-pane{
+	background-image: url("css/HYI_finalscorebottom.png");
+	margin-left:65%;
+	margin-right:35%;
+	visibility: hidden;
+}
+#winner-row-4{
+	z-index:4;
+}
+.winner-icon{
+	background-image:url("css/HYI_blankavatar.png");
+	position: absolute;
+	z-index: 6;
+	width:128px;
+	height:128px;
+	background-repeat: no-repeat;
+	background-size:contain;
+}
+
+#winner-1-icon{
+	background-image: url("css/avatar3.png");
+	background-repeat: no-repeat;
+	background-size:contain;
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	z-index:8;
+	padding:0;
+	left:11px;
+}
+#winner-2-icon{
+	background-image: url("css/avatar5.png");
+	background-repeat: no-repeat;
+	background-size:contain;
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	z-index:8;
+	padding:0;
+	left:11px;
+}
+#winner-3-icon{
+	background-image: url("css/avatar7.png");
+	background-repeat: no-repeat;
+	background-size:contain;
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	z-index:8;
+	padding:0;
+	left:11px;
+}
+/*End Winner's Circle Formatting*/
+/*Start Leaderboard Formatting*/
+#leaderboard{
+	position:relative;
+	z-index: 11;
+}
+#leaderboard-container{
+	background-image: url("css/raindrops_tileable_peach.png");
+	background-clip: padding-box;
+	height: 885px;
+	width:100%;
+}
+#leaderboard-header{
+	color: white;
+	font-family: Aileron;
+	font-size: 48pt;
+	display: none;
+}
+.player-name{
+	position: absolute;
+	font-family: Aileron-Thin;
+	padding-top: 91px;
+	padding-left: 35px;
+	color:blue;
+}
+.leaderboard-row{ 
+	padding:0;
+	padding-bottom:20px;
+	z-index:3;
+}
+.leaderboard-block{
+	background-color: white;
+	height: 150px;
+	width: 42%;
+	padding: 0;
+	visibility: hidden;
+}
+
+.right-block{
+	float:right;
+}
+.leaderboard-icon-left{
+	position: absolute;
+	height:100%;
+	width: 35%;
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-image:url("css/HYI_avatar_circle_no_shadow.png");
+}
+.leaderboard-icon-right{
+	position: absolute;
+	height:100%;
+	width: 35%;
+	left:65%;
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-image:url("css/HYI_avatar_circle_no_shadow.png");
+}
+.left-score{
+	position: absolute;
+	font-family:Aileron;
+	font-size:58pt;
+	padding-left: 200px;
+	padding-top:10px;
+}
+.right-score{
+	position: absolute;
+	font-family:Aileron;
+	font-size:58pt;
+	padding-left: 90px;
+	padding-top:10px;
+}
+#place-1-score{
+	color: #ff6363;
+}
+#place-2-score{
+	color: #fec500;
+}
+#place-3-score{
+	color: #ffa800;
+}
+#place-4-score{
+	color: #0dd0ff;
+}
+#place-5-score{
+	color: #c3ec03;
+}
+#place-6-score{
+	color: #6e6eff;
+}
+#place-7-score{
+	color: #ff3c00;
+}
+#place-8-score{
+	color: #ffa177;
+}
+/*End Leaderboard Formatting*/
+    </style>
+<!-- End Style -->
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+<!-- Top Navbar -->
+    <nav class="navbar navbar-inverse" style="top:0px; width:100%">
+      <div id="ec-logo"></div>
+      <div class="container">
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="hubMain.html"><span class="loginColor">login</span></a></li>
+            <li><a href="playerInterface.html"><span class="aboutColor">about</span></a></li>
+            <li><a href="#contact"><span class="helpColor">help</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- End Navbar -->
+
+<!-- Start game buttons -->
+    <div class="container" id="hub-container">
+        <div class="row" id="hub-row" style="padding:0">
+          <a href="hashtagHub.html"><div id="hashtag-info" class="col-sm-4">
+            <!-- <h2>#You're It</h2>
+            <p>Hash Tag You’re It is a fun bluffing game where players need to use convincing rhetorical language to craft tweets using real hashtag campaigns. By manipulating hashtags and exploring their meanings, students will learn about real hashtag campaigns for marketing or activism (their context, structure, and purpose) and how to rhetorically craft a 140 character limited statement to effectively convey the message of the campaign, or subvert it for a new purpose.</p>
+            
+            <a href="hashtagHub.html" class="btn btn-default" type="submit">Ready?</a> -->
+
+            
+
+          </div></a>
+          <a href="memeHub.html" class="btn" type="submit"> <div id="meme-info" class="col-sm-4">
+<!--          <h2>Wait Wait Don't Tell Meme</h2>
+            <p>Based on the popular NPR game show Wait, Wait Don't Tell Me, Wait, Wait Don't Tell MEME is a investigative bluffing game that teaches players how to quickly fact check image based viral content. This game puts students in the role of conversation-shapers by tasking them to create memes about cultural and political issues through playful acts of creation. They will then learn to parse content for media messages, intent, and impact by ranking the created memes by various measures including political spectrum, tone, intention, and "truthfulness."</p>
+            <a href="memeHub.html" class="btn btn-default" type="submit">Ready?</a> -->
+
+          
+          </div></a>
+          <a href="geeksHub.html"> <div id="geeks-info" class="col-sm-4">
+          <!-- <h2>Wiki Geeks</h2>
+            <p>WikiGeeks is a realtime race played on Wikipedia.org that pits players against each other in a search for specific pages using only links embedded within articles. This game tests a broad cross section of knowledge, especially knowing how different topics relate to one another and how they are mapped digitally. It has the secondary benefit of helping students become familiar with Wikipedia's pages and navigation.</p>
+            <a href="geeksHub.html" class="btn btn-default" type="submit">Ready?</a> -->
+            
+
+          </div></a>
+        </div>
+    </div>
+    <!-- End Game Buttons -->
+    <!-- /.container -->
+
+    <!-- Start Icon section -->
+    <div class="pane-container">
+    <div id="player-icon-test"><button type="button">Icon Test</button></div>
+    <div id="icon-clear-test"><button type="button">Icon Clear Test</button></div>
+    <div id="game-pane" class="row">
+
+    <img id="pane" class="col-md-4" src="css/HYI_waitingroom.png">
+    <h1 id="room-code"> Room Code: </h1>
+    <h1 id="code"><span id="letter-1">A</span><span id="letter-2">B</span><span id="letter-3">C</span><span id="letter-4">D</span></h1>
+
+    </div>
+    <div class="container icon-container">
+            <div class="row icon-row" id="icon-row-1">
+ 
+                <div id="player-icon1" class="player-icon left-icon col-md-1"></div>
+
+                <div id="player-icon5" class="player-icon right-icon col-md-4"></div>
+            </div>
+              <div class="row icon-row" id="icon-row-2">
+
+               <div id="player-icon2" class="player-icon left-icon col-md-1"></div>
+
+               <div id="player-icon6" class="player-icon right-icon col-md-4"></div>
+            </div>
+               <div class="row icon-row" id="icon-row-3">
+
+               <div id="player-icon3" class="player-icon left-icon col-md-1"></div>
+
+               <div id="player-icon7" class="player-icon right-icon col-md-4"></div>
+            </div>
+               <div class="row icon-row" id="icon-row-4">
+
+               <div id="player-icon4" class="player-icon left-icon col-md-1"></div>
+
+               <div id="player-icon8" class="player-icon right-icon col-md-4"></div>  
+            </div>
+            </div>
+    </div>
+<!-- End Icon Section -->
+<!-- Start Tweet Section -->
+<div class="tweet-pane-container">
+
+	<div id="tweet-pane-test"><button type="button">Tweet Game Test</button></div>
+	<div id="tweet-pane-clear-test"><button type="button">Tweet Game Clear Test</button></div>
+
+<!-- Tweet Pane -->
+	    <div id="tweet-game-pane" class="row">
+	    <div class ="col-md-4"></div>
+	    <img id="tweet-pane" class="col-md-4" src="css/HYI_timerbackground.png">
+	    <img id="sample-tweet" class ="col-md-4" src="css/sample_tweet.png">
+	    <div class ="col-md-4"></div>
+	    <h1 id="hashtagging-instructions">make up a <span id="bold-hashtag">hashtag!</span></h1>
+	    <div id="tweet-pane-stuff">
+	    <img id="clock-face" src="css/HYI_clock.png">
+	    <img id="clock-hand" src="css/HYI_clockhand2.png">
+	    </div>
+	    </div>
+
+
+
+<!-- Player Icons -->
+	    <div class="container tweet-icon-container">
+	        <div class="row icon-row" id="icon-row-1">
+	              
+	                <div id="tweet-player-icon1" class="tweet-player-icon left-icon col-md-1"></div>
+	                
+	                <div id="tweet-player-icon5" class="tweet-player-icon right-icon col-md-4"></div>
+	            </div>
+	              <div class="row icon-row" id="icon-row-2">
+	               
+	               <div id="tweet-player-icon2" class="tweet-player-icon left-icon col-md-1"></div>
+	               
+	               <div id="tweet-player-icon6" class="tweet-player-icon right-icon col-md-4"></div>
+	            </div>
+	               <div class="row icon-row" id="icon-row-3">
+	               
+	               <div id="tweet-player-icon3" class="tweet-player-icon left-icon col-md-1"></div>
+	               
+	               <div id="tweet-player-icon7" class="tweet-player-icon right-icon col-md-4"></div>
+	            </div>
+	               <div class="row icon-row" id="icon-row-4">
+	               
+	               <div id="tweet-player-icon4" class="tweet-player-icon left-icon col-md-1"></div>
+	               
+	               <div id="tweet-player-icon8" class="tweet-player-icon right-icon col-md-4"></div>
+	        </div>
+	    </div>
+    </div>       
+<!-- End Icon Section -->
+<!-- End Tweet Section -->
+
+<!-- Start Hashtag Options -->
+<div class="container" id="options-container">
+	<div id="hashtag-options-test"><button type="button">Hashtag Options Test</button></div>
+		<div id="options-clear-test"><button type="button">Options Clear Test</button></div>
+	<div id="guess-real">
+		<div id="real-tweet-options">
+			<h1 id="guess-instructions">guess the <span id="bold-real">real</span> hashtag!</h1>
+		</div>
+	</div>
+	<div id="vote-options" class="container">
+		<div class="row options-row">
+			<div id="options-1-place" class="options-block col-md-5">
+				<div id="options-1-icon" class="options-icon-left">
+				</div>
+				<h2 id="options-1-hashtag" class="hashtag-option">#blahhashtagblah</h2>
+			</div>
+			<div class ="col-md-2"></div>
+			<div id="options-5-place" class="options-block right-block col-md-5">
+				<div id="options-5-icon" class="options-icon-right">
+				</div>
+				<h2 id="options-5-hashtag" class="hashtag-option">#blahhashtagblah</h2>
+			</div>
+		</div>
+		<div class="row options-row">
+			<div id="options-2-place" class="options-block col-md-5">
+				<div id="options-2-icon" class="options-icon-left">
+				</div>
+				<h2 id-"options-2-hashtag" class="hashtag-option">#blahhashtagblah</h2>
+			</div>
+			<div class ="col-md-2"></div>
+			<div id="options-6-place" class="options-block right-block col-md-5">
+				<div id="options-6-icon" class="options-icon-right">
+				</div>
+				<h2 id="options-6-hashtag" class="hashtag-option">#blahhashtagblah</h2>
+			</div>
+		</div>
+		<div class="row options-row">
+			<div id="options-3-place" class="options-block col-md-5">
+				<div id="options-3-icon" class="options-icon-left">	
+				</div>
+				<h2 id="options-3-hashtag" class="hashtag-option">#blahhashtagblah</h2>
+			</div>
+			<div class ="col-md-2"></div>
+			<div id="options-7-place" class="options-block right-block col-md-5">
+				<div id="options-7-icon" class="options-icon-right">
+				</div>
+				<h2 id="options-7-hashtag" class="hashtag-option">#blahhashtagblah</h2>
+			</div>
+		</div>
+		<div class="row options-row">
+			<div id="options-4-place" class="options-block col-md-5">
+				<div id="options-4-icon" class="options-icon-left">
+				</div>
+				<h2 id="options-4-hashtag" class="hashtag-option">#blahhashtagblah</h2>
+			</div>
+			<div class ="col-md-2"></div>
+			<div id="options-8-place" class="options-block right-block col-md-5">
+				<div id="options-8-icon" class="options-icon-right">
+				</div>
+				<h2 id="options-8-hashtag" class="hashtag-option">#blahhashtagblah</h2>
+			</div>
+		</div>
+		</div>
+</div>
+<!-- End Hashtag Options -->
+<!-- Start Voting Results -->
+<div class="container" id="results-container">
+	<div id="voting-results-test"><button type="button">Voting Results Test</button></div>
+	<div id="voting-results-reveal"><button type="button">Reveal Results Test</button></div>
+	<div id="voting-results-clear"><button type="button">Clear Results Test</button></div>
+	
+	<div id="results-pane">
+		<h1 id="created-by">the real hashtag was:</h1>
+		<h1 id="hashtag-spot">#randomhashtag</h1>
+	</div>
+	<div id="real-tweet"></div>
+	<div id="hashtag-author"></div>
+	<div id="wrong-voters-row" class="row">
+	<div class="wrong-voter" id="wrong-voter-1"></div>
+	<div class="wrong-voter" id="wrong-voter-2"></div>
+	<div class="wrong-voter" id="wrong-voter-3"></div>
+	<div class="wrong-voter" id="wrong-voter-4"></div>
+	</div>
+
+	<div id="correct-voters-row" class="row">
+	<div class="correct-voter" id="correct-voter-1"></div>
+	<div class="correct-voter" id="correct-voter-2"></div>
+	<div class="correct-voter" id="correct-voter-3"></div>
+	<div class="correct-voter" id="correct-voter-4"></div>
+	</div>
+
+</div>
+<!-- End Voting Results -->
+<!-- Start Winner's Circle -->
+<div id="winners-circle-container">
+	<div id="winners-circle-test"><button type="button">Winner's Circle Test</button></div>
+	<div id="fake-row" class="row">
+	</div>
+	<div id="header-box">
+		<h1 id="winners-header">Final Scores!</h1>
+	</div>
+	<div id="winners-pane">
+		<div class="row winner-row" id="winner-row-1">
+			<div class= "winner-pane" id="winner-1-pane">
+			<div class="winner-icon"></div>
+			<div id="winner-1-icon"></div>
+				
+				<h2 class="score-text">300</h2>
+				<img class="score-mark" src="css/HYI_finalscores_topscoremarks.png">
+				
+				<h1 class="winner-pane-text">player one</h1>
+			</div>
+		</div>
+		<div class="row winner-row" id="winner-row-2">
+
+			<div class= "winner-pane" id="winner-2-pane">
+			<div class="winner-icon"></div>
+			<div id="winner-2-icon"></div>
+			
+
+			<h2 class="score-text">250</h2>
+			
+			<h1 class="winner-pane-text">player two</h1>
+			</div>
+		</div>
+		<div class="row winner-row" id="winner-row-3">
+
+			<div class= "winner-pane" id="winner-3-pane">
+			<div class="winner-icon"></div>
+			<div id="winner-3-icon"></div>
+			
+
+			<h2 class="score-text">200</h2>
+			
+			<h1 class="winner-pane-text">player three</h1>
+			</div>
+		</div>
+		</div>
+	</div>
+<!-- End Winner's Circle -->
+<!-- Start Leaderboard -->
+<div class="container" id="leaderboard-container">
+<div id="leaderboard-test"><button type="button" style="width:100%">Leaderboard Test</button></div>
+<div id="leaderboard-clear-test"><button type="button" style="width:100%">Leaderboard Clear Test</button></div>
+<div id="leaderboard" class="container">
+		<div class="row leaderboard-row">
+			<h1 id="leaderboard-header">Final Scores!</h1>
+		</div>
+		<div class="row leaderboard-row">
+			<div id="leaderboard-1-place" class="leaderboard-block col-md-5">
+				<div id="leaderboard-1-icon" class="leaderboard-icon-left">
+					<h3 class="player-name">player 1</h3>
+				</div>
+				<h1 id="place-1-score" class="left-score">800</h1>
+			</div>
+			<div class ="col-md-2"></div>
+			<div id="leaderboard-5-place" class="leaderboard-block right-block col-md-5">
+				<div id="leaderboard-5-icon" class="leaderboard-icon-right">
+					<h3 class="player-name">player 5</h3>
+				</div>
+				<h1 id="place-5-score" class="right-score">350</h1>
+			</div>
+		</div>
+		<div class="row leaderboard-row">
+			<div id="leaderboard-2-place" class="leaderboard-block col-md-5">
+				<div id="leaderboard-2-icon" class="leaderboard-icon-left">
+					<h3 class="player-name">player 2</h3>
+				</div>
+				<h1 id="place-2-score" class="left-score">750</h1>
+			</div>
+			<div class ="col-md-2"></div>
+			<div id="leaderboard-6-place" class="leaderboard-block right-block col-md-5">
+				<div id="leaderboard-6-icon" class="leaderboard-icon-right">
+					<h3 class="player-name">player 6</h3>
+				</div>
+				<h1 id="place-6-score" class="right-score">300</h1>
+			</div>
+		</div>
+		<div class="row leaderboard-row">
+			<div id="leaderboard-3-place" class="leaderboard-block col-md-5">
+				<div id="leaderboard-3-icon" class="leaderboard-icon-left">
+					<h3 class="player-name">player 3</h3>
+				</div>
+				<h1 id="place-3-score" class="left-score">600</h1>
+			</div>
+			<div class ="col-md-2"></div>
+			<div id="leaderboard-7-place" class="leaderboard-block right-block col-md-5">
+				<div id="leaderboard-7-icon" class="leaderboard-icon-right">
+					<h3 class="player-name">player 7</h3>
+				</div>
+				<h1 id="place-7-score" class="right-score">250</h1>
+			</div>
+		</div>
+		<div class="row leaderboard-row">
+			<div id="leaderboard-4-place" class="leaderboard-block col-md-5">
+				<div id="leaderboard-4-icon" class="leaderboard-icon-left">
+					<h3 class="player-name">player 4</h3>
+				</div>
+				<h1 id="place-4-score" class="left-score">450</h1>
+			</div>
+			<div class ="col-md-2"></div>
+			<div id="leaderboard-8-place" class="leaderboard-block right-block col-md-5">
+				<div id="leaderboard-8-icon" class="leaderboard-icon-right">
+					<h3 class="player-name">player 8</h3>
+				</div>
+				<h1 id="place-8-score" class="right-score">150</h1>
+			</div>
+		</div>
+		</div>
+</div>
+<!-- End Leaderboard -->
+<!-- Footer/Bottom Container start -->
+
+      <div class="container-bottom">
+      <div id="egl-logo"></div>
+      <div class ="col-xs-12" id="footer-text"><p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p></div>
+      </div>
+      <!-- End Bottom Container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- GreenSock library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.3/TweenMax.min.js"></script>
+<!-- Animation JS File -->
+    <script src="js/animTest.js"></script>
+  </body>
+</html>

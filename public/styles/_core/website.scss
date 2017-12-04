@@ -1,0 +1,339 @@
+
+//ABOUT PAGE
+.aboutPage {
+    background: $homepage-color;
+    /* For browsers that do not support gradients */
+    
+    background: -webkit-linear-gradient(to bottom, white 0%, $homepage-color 70%, $homepage-color 100%);
+    /* For Safari 5.1 to 6.0 */
+    
+    background: -o-linear-gradient(to bottom, white 0%, $homepage-color 70%, $homepage-color 100%);
+    /* For Opera 11.1 to 12.0 */
+    
+    background: -moz-linear-gradient(to bottom, white 0%, $homepage-color 70%, $homepage-color 100%);
+    /* For Firefox 3.6 to 15 */
+    
+    background: linear-gradient(to bottom, white 0%, $homepage-color 70%, $homepage-color 100%);
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: darken($color-gray, 40%);
+    .aboutResearch {
+        .research {
+            padding: 0px 10%;
+            .about-title {
+                font-size: 2em;
+                text-align: left;
+            }
+            .research-text {
+                font-size: 1.2em;
+                text-align: justify;
+            }
+        }
+        img {
+            padding-right: 5%;
+        }
+    }
+    .feat-title,
+    .bottom-title {
+        text-align: left;
+        width: 80%;
+        font-size: 2em;
+        margin: 40px auto;
+
+        @include mobile-landscape-and-below {
+            font-size: .8em;
+        }
+    }
+    .bottom-title {
+        margin-bottom: 10%;
+    }
+    .aboutFeatures {
+        width: 90%;
+        margin: 0 auto;
+        .feature {
+            .markdown-content {
+                text-align: justify;
+                h2 {
+                    text-align: center;
+                }
+            }
+        }
+        img {
+            width: 100%;
+        }
+    }
+}
+// GAME PAGES 
+.coming-soon-plans {
+    font-size: 5em;
+    color: darken($color-gray, 30%);
+    h2 {
+        font-size: 30px;
+    }
+}
+// CATEGORIES 
+body.newgame {
+    #gameContent {
+        padding: 0 !important;
+    }
+    input[type=submit] {
+        min-width: 100px;
+        min-height: 60px;
+        font-size: 3em;
+    }
+     .error {
+        display: none;
+        color: white;
+        background-color: #ab3724;
+        font-size: 2em;
+        min-height: 50px;
+        padding: 10px;
+        border: 0;
+    }
+    .category-instructions {
+        text-align: center;
+        color: #595959;
+        font-size: 1.6em;
+        padding: 0px 5%;
+    }
+    #categories {
+        display: inline-block;
+    }
+    #btn_submit {
+        color: white;
+        border: none;
+        position: fixed;
+        font-size: 4em;
+        bottom: 0;
+        height: 150px;
+        width: 400px;
+        outline: 0;
+        margin: 0 auto; 
+        @include translate (-200px, 0px);
+    }
+    #session-create {
+        width: 80%;
+        margin: 0 auto;
+        left: 10%;
+
+        .select-buttons {
+            color: white;
+            border: none;
+            outline: 0;
+            font-size: 0.5em;
+            display: inline-block;
+            .button_text {
+                line-height: 35px;
+                width: 200px;
+                margin: 0px 20px;
+                text-align: center;
+                
+            }
+        }
+    }
+    #logo_ec {
+        background-color: white;
+        margin-bottom: 5%;
+    }
+    .category-box {
+        min-height: 300px;
+        max-height: 300px;
+        width: 90%;
+        margin: 0 auto;
+        padding: 2%;
+        cursor: pointer;
+
+        .checkbox {
+            visibility: hidden;
+            position: absolute;
+            right: 5%;
+            top: -13%;
+        }
+        h2 {
+            font-size: 1.3em;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+            margin-top: 16%;
+            bottom: 10%;
+            width: 100%;
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
+    #session-create {
+        background: none;
+        border: none;
+
+        .form {
+            padding: 2%;
+            margin-bottom: 10%;
+            font-size: 1.3em;
+            height: auto;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+    }
+    &.htyi {
+        #title {
+            color: $color-peach;
+        }
+        #categories {
+            .category-box {
+                @include box-shadow(3px, 0px, 12px, #964b2d);
+                border: 5px solid $color-peach;
+                background-color: white;
+                color: $color-orange;
+                margin: 2% auto;
+                &.selected {
+                    border: 5px solid lighten($color-peach, 20%);
+                }
+                .markdown-content {
+                    color: darken($color-gray, 30%);
+                }
+                button {
+                    color: $color-peach;
+                }
+            }
+        }
+        .button_text {
+            border: 0px;
+            background-color: darken($color-peach, 5%);
+            &:hover, &:focus {
+                outline: 0;
+                box-shadow: none;
+                background-color: darken($color-peach, 10%);
+            }
+            &:visited {
+                background-color: darken($color-peach, 5%);
+                outline: 0;
+                box-shadow: none;
+            }
+        }
+    }
+    &.wikigeeks {
+        #title {
+            color: $color-bg;
+        }
+        #categories {
+            .category-box {
+                border: 5px solid $color-bg;
+                background-color: white;
+                color: $color-bg;
+                margin: 2% auto;
+                &.selected {
+                    border: 5px solid lighten($color-bg, 20%);
+                }
+                .markdown-content {
+                    color: darken($color-gray, 30%);
+                }
+                button {
+                    color: $color-bg;
+                }
+            }
+        }
+        .button_text  {
+            border: 0px;
+            background-color: $color-bg;
+            &:hover, &:focus {
+                outline: 0;
+                box-shadow: none;
+                background-color: darken($color-bg, 10%);
+            }
+            &:visited {
+                background-color: $color-bg;
+                outline: 0;
+                box-shadow: none;
+            }
+        }
+    }
+    &.wwdmm {
+        #title {
+            color: $color-dodger-blue;
+        }
+        #categories {
+            .category-box {
+                border: 5px solid $color-dodger-blue;
+                background-color: white;
+                color: $color-dodger-blue;
+                margin: 2% auto;
+                &.selected {
+                    border: 5px solid lighten($color-dodger-blue, 20%);
+                }
+                .markdown-content {
+                    color: darken($color-gray, 30%);
+                }
+                button {
+                    color: $color-dodger-blue;
+                }
+            }
+        }
+        .button_text {
+            background-color: $color-dodger-blue;
+            border: 0px;
+            &:hover , &:focus {
+                outline: 0;
+                box-shadow: none;
+                background-color: darken($color-dodger-blue, 10%);
+            }
+            &:visited {
+                background-color: $color-dodger-blue;
+                outline: 0;
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+#htyi-page {
+    background: $background-groupview, $color-peach !important;
+}
+#wikigeeks-page {
+  background-image: $background-wiki !important;
+}
+#wwdmm-page {
+    background-image: $background-wwdmm !important;
+}
+
+// EC Website Other Than Homepage
+@media (min-width: 2000px) {
+    body.newgame {
+        #session-create {
+            width: 100%;
+            left: 0px;
+        }
+        .form {
+            font-size: 1.5em;
+        }
+    }
+}
+@media (min-width: 1024px) and (max-width: 1680px) {
+    body.newgame {
+        #session-create {
+            width: 95%;
+            left: 2.5%;
+        }
+        .select-buttons {
+            
+            input {
+                width: 300px !important;
+                height: 100px;
+                font-size: 5.2em;
+            }
+        }
+        .form {
+            font-size: 1.6em;
+
+            .category-box {
+                height: 400px;
+                font-size: 1.2em;
+
+            }
+        }
+    }
+}
