@@ -2,4 +2,4 @@
 
 Mad Literacy (name pending) is a game about social media and news. Players join the Mad Literacist in his mission to understand all the information in the world, starting with history. Historical figures have been recreated in a social media platform made by the Mad Literacist, but the platform is smart...too smart. The system has begun to create fake news, and the Mad Literacist needs you to infiltrate different profiles on social media, sharing (or not sharing) news as they would, and tagging news for the Mad Literacist's database. Careful, though - if the system detects that you are **not** the profile you seem to be, it will kick you out, and game-over. 
 
-This project is open-source, built on the open-source learning game suite, Emerging Citizens by The Engagement Lab, and uses state-standards for enhanced and integrated student learning. 
+This project is open-source, built on the open-source learning game suite, Emerging Citizens, by The Engagement Lab, and uses state-standards for enhanced and integrated student learning. 

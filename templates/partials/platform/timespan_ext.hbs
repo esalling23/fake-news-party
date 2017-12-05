@@ -1,0 +1,14 @@
+<div class="row timespan-ext-wrap">
+
+	{{#for 4}}
+
+		{{> platform/decade_block 
+			block=(product (sum @index 1) 20) 
+			profiles=(index profiles @index)
+		}}
+
+	{{/for}}
+
+	{{{jsonPrint profiles}}}
+    
+</div>

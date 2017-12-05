@@ -12,8 +12,9 @@
  *
  * ==========
  */
-var keystone = require('keystone'),
-    Player = keystone.list('Player'), 
+var _ = require('underscore'), 
+    keystone = require('keystone'),
+    Profile = keystone.list('Profile'), 
     TimeSpan = keystone.list('TimeSpan');
 
 exports = module.exports = function(req, res) {
@@ -26,22 +27,30 @@ exports = module.exports = function(req, res) {
 
     view.on('init', function(next) {
 
-      var queryPlayers = Player.model.findOne({}, {}, {
+      var queryProfiles = Profile.model.find({}, {}, {
+        sort: {
+            'createdAt': -1
+        }
+      })
+      .populate('pros cons neutrals timeSpan missions');
+
+      var queryTimeSpan = TimeSpan.model.find({}, {}, {
         sort: {
             'createdAt': -1
         }
       });
 
-      var queryTimeSpan = TimeSpan.model.findOne({}, {}, {
-        sort: {
-            'createdAt': -1
-        }
-      });
+      queryProfiles.exec(function (err, result) {
 
-      // If game is enabled, get home page content
-      queryPlayers.exec(function (err, result) {
+        locals.profiles = result;
         
-        next(err);
+        queryTimeSpan.exec(function (err, result) {
+
+          locals.timespans = result;
+
+          next(err);
+
+        });
 
       });     
 

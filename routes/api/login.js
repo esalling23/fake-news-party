@@ -27,7 +27,7 @@ var TemplateLoader = require(appRoot + '/lib/TemplateLoader'),
  */
 exports.modal = function(req, res) {
 
-    var template = 'partials/platform/loginModal';
+    var template = 'partials/platform/login_modal';
 
     var data = {
         role: req.params.role.replace('-entry', '')
@@ -52,7 +52,8 @@ exports.login = function(req, res) {
 
     // <-- 
 
-    res.send( '/platform/' + req.params.role );
+    // Temporarily send people through without logging in
+    res.send( '/platform/' + req.params.role.replace('-entry', '') );
 
 };
 

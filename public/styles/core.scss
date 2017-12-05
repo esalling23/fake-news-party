@@ -10,13 +10,8 @@
 @import "_core/website";
 @import "_core/media";
 
-// Game-specific styling
-@import "_htyi/groupview";
-@import "_wiki/groupview";
-@import "_wwdmm/groupview";
-@import "_htyi/playerview";
-@import "_wiki/playerview";
-@import "_wwdmm/playerview";
+@import "_core/platform";
+
 
 html, body {
 	max-height: 100%;	

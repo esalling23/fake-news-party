@@ -47,7 +47,16 @@ Profile.add({
 	 	label: 'Missions/Scenarios',
 	 	ref: 'Scenario', 
 	 	many: true
-	}
+	}, 
+
+	timeSpan: { 
+		type: Types.Relationship,
+	 	label: 'Related Timespan',
+	 	ref: 'TimeSpan', 
+	 	many: false
+	}, 
+
+	decadeBlock: { type: Types.Select, label: 'Decade(s) Within Time Span', options: '20, 40, 60, 80'}
 
 }, 'Leanings', {
 	pros: { 

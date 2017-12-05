@@ -376,7 +376,7 @@ window.onload = function() {
 			data,
 			function( data ) {
 
-				window.location = data.link;
+				window.location = data;
 
 			}
 		);
@@ -388,12 +388,14 @@ window.onload = function() {
     // When Clicking on a timespan block, it should fade away and show its broken down blocks (ie. 1800 would break down into 1800, 1820, 1840, 1860, 1880)
     // There should be an API call to get the playable characters for each time section
     $('body').on('click', '.timespan', function(e) {
-    	$(this).fadeOut();
+    	$('.timespan-wrap').fadeOut();
 
-    	var data = $(this).attr('id');
+    	var data = {
+    		timespan: $(this).attr('id')
+    	};
 
     	$.get( 
-    		"/api/login",
+    		"/api/timespan/" + $(this).attr('id'),
 			data,
 			function( data ) {
 

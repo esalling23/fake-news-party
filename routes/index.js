@@ -67,6 +67,9 @@ exports = module.exports = function(app) {
     // Platform Base
     app.get('/platform/:role', routes.views.platform);
 
+    app.get('/api/timespan/:block', keystone.middleware.api, routes.api.timeline.extend);
+
+
     app.post('/api/create/:game_type', keystone.middleware.api, routes.api.gamesession.create);
     app.post('/api/load/', keystone.middleware.api, routes.api.templates.load);
     

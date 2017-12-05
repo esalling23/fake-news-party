@@ -35,7 +35,7 @@ var Scenario = new keystone.List('Scenario',
  */
 Scenario.add({
 
-	name: { type: String, label: 'Headline', required: true, initial: true },
+	name: { type: String, label: 'Name', required: true, initial: true },
 
 	events: { 
 		type: Types.Relationship, 

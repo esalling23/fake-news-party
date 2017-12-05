@@ -20,11 +20,15 @@
 
         <div class="tab-pane active" id="missions" role="tabpanel">
 
-            {{#each timeSpan}}
+            <div class="timespan-wrap">
+            
+                {{#each timespans}}
 
-            <div class="timespan" id="{{key}}"></div>
+                <div class="timespan" id="{{key}}">{{name}}</div>
 
-            {{/each}}
+                {{/each}}
+
+            </div>
 
             <div class="timespan-ext"></div>
 

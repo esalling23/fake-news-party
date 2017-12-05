@@ -11,6 +11,35 @@ module.exports = function() {
      * ===================
      */
 
+     // Iterate through # of times
+     _helpers.for = function(int, block) {
+        var accum = '';
+        for(var i = 0; i < int; ++i) {
+            block.data.index = i;
+            block.data.first = i === 0;
+            block.data.last = i === (int - 1);
+            accum += block.fn(this);
+        }
+        return accum;
+    };
+
+    // Find Index of array
+    _helpers.index = function(arr, i) {
+
+        return arr[i];
+    };
+
+    // Product of two integers
+    _helpers.product = function(a, b) {
+
+        return a * b;
+    };
+
+    // Sum of two integers
+    _helpers.sum = function(a, b) {
+
+        return a + b;
+    };
 
     //  ### less than checker
     _helpers.iflt = function(a, b, options) {
