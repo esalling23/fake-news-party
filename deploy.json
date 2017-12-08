@@ -1,6 +1,6 @@
 {
   "apps" : [{
-    "name": "Emerging Citizens",
+    "name": "Fake News Game",
     "script": "server.js",
     "env_production": {
       "NODE_ENV": "production"
@@ -13,12 +13,12 @@
 
     "sdk-staging" : {
       "user": "node",
-      "host": "159.203.174.12",
-      "repo": "git@github.com:engagementgamelab/EL-Website.git",
+      "host": "165.227.100.1",
+      "repo": "https://github.com/esalling23/el-web-sdk.git",
       "ref": "origin/master",
       "path": "/srv/framework",
       "pre-deploy-local" : "echo 'Cloning and running npm install. Be patient.';",
-      "post-deploy" : "npm i ; npm update ; grunt compile --sites=emerging-citizens --env staging ; pm2 restart 0 -- emerging-citizens --env staging",
+      "post-deploy" : "npm i ; npm update ; grunt compile --sites=fake-news-party --env staging ; pm2 restart 0 -- fake-news-party --env staging",
       "env": {
         "NODE_ENV": "staging"
       }
@@ -26,12 +26,12 @@
 
     "staging" : {
       "user": "node",
-      "host": "159.203.174.12",
-      "repo": "git@github.com:engagementgamelab/emerging-citizens.git",
+      "host": "165.227.100.1",
+      "repo": "https://github.com/esalling23/fake-news-party.git",
       "ref": "origin/master",
-      "path": "/srv/emerging-citizens",
-      "pre-deploy-local" : "echo 'NPM linking emerging-citizens and restarting app.'; git pull git@github.com:engagementgamelab/EL-Website.git master;",
-      "post-deploy" : "npm i ; npm update ; cd /srv/framework/current/ ; npm i ; grunt compile --sites=emerging-citizens --env staging ; NODE_ENV=staging pm2 restart 0 -- emerging-citizens --env staging"
+      "path": "/srv/fake-news-party",
+      "pre-deploy-local" : "echo 'NPM linking fake-news-party and restarting app.'; git pull git@github.com:engagementgamelab/EL-Website.git master;",
+      "post-deploy" : "npm i ; npm update ; cd /srv/framework/ ; npm i ; grunt compile --sites=fake-news-party --env staging ; NODE_ENV=staging pm2 restart 0 -- fake-news-party --env staging"
     },
 
     "sdk-production" : {
@@ -41,7 +41,7 @@
       "ref": "origin/production",
       "path": "/srv/framework",
       "pre-deploy-local" : "echo 'Cloning and running npm install. Be patient.'",
-      "post-deploy" : "npm install ; npm update ; grunt compile --sites=emerging-citizens --env production ; pm2 restart 'server' -- emerging-citizens --env production",
+      "post-deploy" : "npm install ; npm update ; grunt compile --sites=fake-news-party --env production ; pm2 restart 'server' -- fake-news-party --env production",
       "env": {
         "NODE_ENV": "production"
       }
@@ -50,11 +50,11 @@
     "production" : {
       "user": "node",
       "host": "104.236.109.221",
-      "repo": "git@github.com:engagementgamelab/emerging-citizens.git",
+      "repo": "git@github.com:engagementgamelab/fake-news-party.git",
       "ref": "origin/production",
-      "path": "/srv/emerging-citizens",
-      "pre-deploy-local" : "echo 'NPM linking emerging-citizens and restarting app.';",
-      "post-deploy" : "npm i ; npm update ; cd /srv/framework/current/ ; grunt compile --sites=emerging-citizens --env production ; NODE_ENV=production pm2 restart 'server'"
+      "path": "/srv/fake-news-party",
+      "pre-deploy-local" : "echo 'NPM linking fake-news-party and restarting app.';",
+      "post-deploy" : "npm i ; npm update ; cd /srv/framework/current/ ; grunt compile --sites=fake-news-party --env production ; NODE_ENV=production pm2 restart 'server'"
     }
 
   }
