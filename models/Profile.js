@@ -56,7 +56,7 @@ Profile.add({
 	 	many: false
 	}, 
 
-	decadeBlock: { type: Types.Select, label: 'Decade(s) Within Time Span', options: '20, 40, 60, 80'}
+	decadeBlock: { type: Types.Select, label: 'Decade(s) Within Time Span', options: '00, 20, 40, 60, 80'}
 
 }, 'Leanings', {
 	pros: { 

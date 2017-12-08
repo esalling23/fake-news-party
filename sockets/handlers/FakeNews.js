@@ -29,8 +29,8 @@ var Common = function (nsp, socket) {
 
         'game:start': function(package) {
 
-            // Session.Get(package.gameId).
-            // StartGame(currentSpace);
+            Session.Get(package.gameId).
+            StartGame(currentSpace);
 
         },
 

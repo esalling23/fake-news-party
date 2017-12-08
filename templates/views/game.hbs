@@ -1,0 +1,36 @@
+{{!< default}}
+{{!--
+/**
+* Engagement Lab Web Suite
+* Developed by Engagement Lab, 2016
+* ==============
+*
+* Index Page sample Template
+* ==========
+*/
+--}}
+
+<div class="game">
+
+	<div class="pre">
+
+		{{> game/base}}
+
+		{{!-- {{> game/rules}} --}}
+
+	</div>
+
+	<div class="profile" data-stage="game:newProfile" id="current-profile">
+	</div> <!-- .profile -->
+
+	<div class="feed" data-stage="game:newFeed" id="feed" style="display:none">
+	</div> <!-- .feed -->
+
+	<div class="round-end" data-stage="game:round-end" style="display:none;" id="round-end">
+	</div> <!-- .round-end -->
+
+	<div class="game-over" data-stage="game:end" style="display:none;" id="game-over">
+	</div> <!-- .game-over -->
+
+</div> <!-- .game -->
+

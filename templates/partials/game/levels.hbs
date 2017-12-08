@@ -1,0 +1,16 @@
+<div class="profiles" id="profile-group">
+
+    <div class=""></div>
+		<div class="profile-group">
+			{{#each profile}}
+				<div class="profile-select" id="{{this.key}}">
+					<div class="profile-image">
+						<img src="{{{cloudinaryUrl this.image width="80" height="80"}}}"><h3><span>{{this.name}}</span></h3>
+						{{{this.bio.html}}}
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+
+</div>

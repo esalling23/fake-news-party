@@ -25,14 +25,20 @@ var _ = require('underscore'),
     Profile = keystone.list('Profile'), 
     TimeSpan = keystone.list('TimeSpan');
 
+var categorize = function(arr, cat) {
+    return arr.filter(function(item) {
+        return item.timeSpan.name == cat;
+    });
+};
 /**
  * Open Login Modal
  */
 exports.extend = function(req, res) {
 
-    var template = 'partials/platform/timespan_ext';
-
-    var data = {};
+    var template = 'partials/platform/timespan_ext', 
+        data = {},
+        timespan = req.params.block,
+        decades = [0, 20, 40, 60, 80];
 
     var queryProfiles = Profile.model.find({}, {}, {
         sort: {
@@ -41,56 +47,40 @@ exports.extend = function(req, res) {
     })
     .populate('pros cons neutrals timeSpan missions');
 
-    var queryTimeSpan = TimeSpan.model.find({}, {}, {
-        sort: {
-            'createdAt': -1
-        }
-    });
-
     queryProfiles.exec(function (err, result) {
 
-        var profiles = result;
-        
-        queryTimeSpan.exec(function (err, result) {
-
-            var timespans = result,
+        var profiles = categorize(result, timespan), 
             profileBlocks = [],
             timeBlock;
 
-            _.each(timespans, function (timespan, index) {
-                timeBlock = index;
+        _.each(decades, function (timespan, index) {
+            timeBlock = index;
 
-                _.each(profiles, function (profile, index) {
+            _.each(profiles, function (profile, index) {
 
-                    if( profile.timeSpan.key === timespan.key ) {
+                if( profile.decadeBlock == timespan ) {
 
-                        if (!profileBlocks[ timeBlock ])
-                            profileBlocks[ timeBlock ] = [];
+                    if (!profileBlocks[ timeBlock ])
+                        profileBlocks[ timeBlock ] = [];
 
-                        profileBlocks[ timeBlock ].push( profile );
-                    }
-
-                });
+                    profileBlocks[ timeBlock ].push( profile );
+                }
 
             });
 
-            var data = {
-                profiles: profileBlocks, 
-                timespans: timespans
-            };
-            
-            Templates.Load( template, data, function( html ) {
-
-                res.send({ eventData: html });
-
-            }); 
-
         });
 
+        var data = {
+            profiles: profileBlocks
+        };
+        
+        Templates.Load( template, data, function( html ) {
+
+            res.send({ eventData: html });
+
+        }); 
+
     });  
-
-    
-
 
 };
 

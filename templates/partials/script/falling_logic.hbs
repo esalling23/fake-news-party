@@ -1,0 +1,127 @@
+{{!< default}}
+{{!-- 
+/**
+ * Uncertainty Project
+ * Developed by Engagement Lab, 2016
+ * ==============
+ * 
+ * Script include for global logic
+ * ==========
+ */
+--}}
+
+
+var event;
+var gameId = '{{gameId}}';
+var bottom;
+var commentStack;
+var commentFalling;
+
+$(document).on('event:feed', function() {
+
+	var article = parseInt($('#post-feed').find('.post').css('height'));
+
+	$('#post-feed').css('bottom', $('.feed-wrap').height);
+	$('#post-feed').css('height', (($('.post').length * article) + 200) + 'px');
+
+	var bottom = 0;
+
+	_.each($('.post'), function(post){
+
+		$(post).css('bottom', bottom);
+		bottom += article;
+
+	});
+
+	// Call comments animation logic	
+	StartCommentFeed(article);	
+
+});
+
+var StartCommentFeed = function(article){
+
+	console.log("startnig events");
+	var length = '-' + $('.post').length * article + 'px';
+
+	$('#post-feed').show();
+
+	var postSteps = [];
+	_.each($('#post-feed .post'), function(post) {
+		postSteps.push(-(parseInt($(post).css('bottom')) + 300));
+	});
+
+	var time = postSteps.length * 7000;
+
+	var postPastId;
+
+	$('#post-feed').animate({
+	    bottom: length
+	}, {
+		easing: 'linear',
+		duration: time,
+		start: function(){
+			$('.fb-footer .profile-btn, .profile-wrapper .profile-btn').addClass('animating');
+		},
+	  	step: function( now, fx ) {
+
+		    if( postSteps[0] == Math.round(now) ){
+			    postSteps.shift();
+			    postPastId = $(this).find('.post:not(.past)').first().attr('id');
+			    $('#' + postPastId).addClass('past');
+
+			    if (!$('#' + postPastId).hasClass('shared')){
+			    	var data = {
+			    		post: $(this).find('.post.past').last().attr('id'),
+			    		shared: false
+			    	};
+				    socket.emit('feed:skip', { gameId: 'TEST', data: data });
+			    }
+		    }
+		}, 
+	  	complete: function() {
+		  	console.log("round over");
+		  	socket.emit('feed:end', { gameId: 'TEST', data: data });
+	  	}
+	});
+
+	// pause/resume feed
+	$(".profile-btn").on('click', function() {
+
+		if ($(this).hasClass('animating')) {
+			$(".profile-btn").toggleClass('stopped').toggleClass('animating');
+			$("#post-feed").pause();
+		} else if ($(this).hasClass('stopped')) {
+			$(".profile-btn").toggleClass('stopped').toggleClass('animating');
+			$("#post-feed").resume();
+		} 
+	    
+	});
+
+	// Comment Logic
+	$('.post .share-btn').on('click', function(){
+
+		if ($(this).parent('.post').hasClass('shared')){
+
+			return;
+
+		} else {
+
+			$(this).closest('.post').addClass('shared');
+			$(this).prop("disabled", true);
+
+			var data = {
+				post: $(this).closest('.post').attr('id'), 
+				shared: true
+			};
+
+			console.log(data);
+			
+			socket.emit('feed:share', { gameId: 'TEST', data: data });
+			
+		}
+		
+
+	});
+
+}
+

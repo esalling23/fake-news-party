@@ -1,0 +1,38 @@
+<div class="feed-wrap">
+	<div id="post-feed" style="display:none">
+
+		{{#each articles}}
+
+			<div class="post" id="{{this.key}}">
+
+				<div class="post-header">
+					{{!-- <div class="btn likes"></div>
+					<div class="btn comments"></div> --}}
+					<button class="btn submit share-btn">SHARE</button>
+				</div>
+
+				<div class="post-body" style="background-image:url('{{this.cover.secure_url}}');">
+
+					<div class="headline">{{this.name}}</div>
+
+				</div>
+
+				<div class="user">
+
+					<img class="profile-image" src="{{cloudinaryUrl /v1492992566/Fake-news/genericfriendicon.png height="50" width="50"}}">
+					<div class="profile-name">{{this.user}}</div>
+
+				</div>
+				<div class="comment-text">{{this.comment}}</div>
+
+
+			</div>
+
+		{{/each}}
+
+		<div class="loading"></div>
+
+	</div>
+</div>
+
+

@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-  var io = require('socket.io')(app, { path: '/group-party/' });
+  var io = require('socket.io')(app, { path: '/fake-news/' });
 
   var GameManager = require('../lib/GameManager');
   var CommonHandler = require('./handlers/Common');

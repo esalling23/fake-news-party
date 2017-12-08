@@ -1,0 +1,45 @@
+<div class="profile-wrapper">
+	<div class="profile-header" style="background-image:url('{{{cloudinaryUrl currentProfile.cover height="100"}}}')">
+
+		<div class="profile-image">
+
+			<img src="{{{cloudinaryUrl currentProfile.image width="80" height="80"}}}"><p><strong>{{currentProfile.name}}</strong></p>
+
+		</div>
+
+	</div>
+
+	<div class="about">
+
+		{{{currentProfile.bio.html}}}
+{{!-- 
+		I am {{#each buckets}}{{#if @last}} and {{trait.name}}{{else}} {{trait.name}},{{/if}}{{/each}}. --}}
+
+	</div>
+
+	<div class="analysis" id="analysis" style="display:none;">
+
+		<p><strong>Psst...we've done a little analysis based on the things {{currentProfile.name}} says about himself, and how that corresponds with his follower-base.</strong></p>
+
+		<p>These are {{currentProfile.name}}'s <strong>{{followerCount}}</strong> followers, broken down for you:<p>
+
+		{{!-- {{#each buckets}}
+
+		<div class="follower-bucket-bar" id="{{trait.key}}:{{opposite.key}}">
+			<div class="followers trait {{#ifeq neutral false}}focus{{/ifeq}}" style="width:{{splitRatio ratio true}}%" id="{{trait.key}}">
+			{{trait.name}}: {{splitRatio ratio true}}%</div>
+			<div class="followers opposite" style="width:{{splitRatio ratio false}}%" id="{{opposite.key}}">
+			{{opposite.name}}: {{splitRatio ratio false}}%</div>
+			<div class="followers neutral {{#ifeq neutral true}}focus{{/ifeq}}" style="width:{{splitRatioExtra ratio}}%">{{#ifeq (splitRatioExtra ratio) 0}}{{else}}
+			{{splitRatioExtra ratio}}%{{/ifeq}}</div>
+		</div>
+
+		{{/each}} --}}
+		
+		<a id="start-round">start</a>
+
+	</div>
+	<a class="profile-btn" style="display:none;">Profile</a>
+
+</div>
+
