@@ -68,14 +68,16 @@ Article.schema.statics.removeResourceRef = function(resourceId, callback) {
     Article.model.update({
             $or: [{
                 'pros': resourceId, 
-                'cons': resourceId
+                'cons': resourceId, 
+                'types': resourceId
             }]
         },
 
         {
             $pull: {
                 'pros': resourceId,
-                'cons': resourceId
+                'cons': resourceId, 
+                'types': resourceId
             }
         },
 

@@ -14,7 +14,8 @@
 var Common = function (nsp, socket) {
     var currentSpace = nsp,
         currentSocket = socket, 
-        Session = require('learning-games-core').SessionManager;
+        appRoot = require('app-root-path'),
+        Session = require(appRoot + '/lib/SessionManager');
 
     // Expose handler methods for events
     this.handler = {

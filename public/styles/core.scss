@@ -2,496 +2,528 @@
 @import "_core/variables";
 @import "_core/mixins";
 @import "_core/functions";
-@import "_core/forms";
-@import "_core/player";
-@import "_core/groupview";
-// @import "_core/comingsoon";
-@import "_core/homepage";
-@import "_core/website";
-@import "_core/media";
 
 @import "_core/platform";
 
-
-html, body {
-	max-height: 100%;	
-	max-width:100%;
-}
-html {
-	height:100%;
-	-webkit-overflow-scrolling: touch;
-}
-
-body {
-	display: none;
-	height:100%;
-	overflow-x: hidden;
-
-}
-
-.container {
-	width: 100% !important;
-	
-	padding: 0px !important;
-}
-
-.landing {
-	.container {
-		height: auto;
-	min-height:75%;
-	}
-}
-
-// Bootstrap override
-.form {
-	min-height: 10%;
-
-	// iOS fixes
-	#btn-submit-code {
-		-webkit-appearance: none;
-		background: white;
-	}
-}
-
-.text.centered {
-	text-align:center;
-}
-
-// Center any column, yay!
-.col-centered {
-  float: none;
-  display: inline-block;
-  margin: 0 auto;
-}
-.col-centered-md {
-	@include tablet-landscape-and-below {
-	  float: none;
-	  margin: 0 auto;
-	}
-}
-.col-centered-sm {
-	@include mobile-landscape-and-below {
-	  float: none;
-	  margin: 0 auto;
-	}
-}
-
-// No padding for column
-.col-no-padding {
-	padding: 0;
-}
-
-// Use for any elements hidden initially
-.hidden-el {
+// Use for any elements hidden initilly
+.hidden {
 	visibility: hidden;
 }
 
-.screen-title {
-	font-size: 4em;
-	color: white;
-}
-
-.body.game-bg.player {
-	background-color:white;
-	color: $color-teal;
+html, body{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
 }
 
 // Body
 .body {
-  font-family: "Avenir";
-  // background: $background-main, $color-peach;
-	
-	@include mobile-only {
-	  // background-color: #fdae8f;
-	}
-}
-
-#replay, #btn_replay {
-	button {
-		width: 40%;
-		padding:2%;
-
-		@media (max-width:425px){
-			width: auto;
-		}
-	}
-
-}
-
-.body.game-bg {
-	
-  // @include linear_transition(background, 0.5s);
-  
-  overflow-x: hidden;
-
-	&.player {
-		background-image: $background-main;
-
-		#logo_ec {
-			margin-top: -15px;
-			background-color: $color-gray;
-		}
-
-		.entry-footer{
-			background-color: $color-gray;
-			padding: 10px;
-
-			button {
-				background-color: $color-gray;
-			}
-		}
-
-	}
-
-  &.htyi {
-	  background: $background-groupview, $color-peach !important;
-	}
-	&.wikigeeks {
-	  background-image: $background-wiki !important;
-	}
-	&.wwdmm {
-		background-image: $background-wwdmm !important;
-	}
-
-}
-
-
-.body.newgame {
-
-	overflow: visible !important;
-
-  @include linear_transition(background, 0.5s);
-  &.htyi {
-	  background: $background-groupview, $color-peach !important;
-	}
-	&.wikigeeks {
-	  background-image: $background-wiki !important;
-	}
-	&.wwdmm {
-		background-image: $background-wwdmm !important;
-	}
-
-}
-
-.body.player.wikigeeks {
-	  background-image: $background-wiki;
-}
-
-.body.monitor {
-  background: $background-groupview, $color-light-orange;
-  background-size: 35%;
-}
-
-// Modal container
-.modal {
-	display: none;
-	position: absolute;
-	width: 100%; 
-	height: 100%; 
-    z-index: 1999;
-    top: 0;
-	left: 0;
-
-	.login-wrap {
-		max-width: 400px;
-		min-height: 300px;
-		margin: 0px auto;
-		background: white;
-		border: solid black 2px;
-		position: fixed;
-		left: calc(50% - 200px);
-		top: 100px;
-	}
-
-  // Tutorial modal
-  .tutorial {
-		width: 100%; 
-		height: 100%;
-		visibility: hidden;
-
-		#img {			
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    height:100%;
-		    img {
-		    	height:100%;
-		    }
-		}
-		
-		#countdown, #continue {
-	    position: fixed !important; 
-	    bottom: 10%;
-	    right: 4%;
-	    width: 150px;
-	    cursor: pointer;
-	    .icon {
-				display: inline-block;
-				fill: currentColor;
-				width: 1em;
-				height: 1em;
-				margin-top: 22%;
-			}
-			.icon-arrow-right {
-				width: 0.8212890625em;
-			}
-
-	    .text {
-	    	font-size: 8em;
-	    	top: 58% !important;
-	    	color: #fff !important;
-	    }
-		}
-		
-  }
+  background-color: $fb-grey;
+  color: $fb-darkgrey;
+  font-family: "HalisLight";
 }
 
 .desktop-only {
 	// Hide for mobile
-	@include mobile-landscape-and-below {
+	@include mobile-only {
 		display: none;
 	}
-	// @include mobile-portrait-and-below {
-	// 	display: none;
-	// }
 }
 .mobile-only {
 	// Hide for desktop
-	// @include mobile-portrait-and-up {
-	// 	display: none;
-	// }
-	@include mobile-landscape-and-up {
+	@include desktop-and-up {
 		display: none;
 	}
 }
+.buffer {
+		margin-top: 5%;	
+}
 
-// Navbar START
+.option {
+	&.active {
+		outline: 3px yellow solid;
+	}
+}
 
-#logo_img {
-	height: 50px;
-	width: 50px;
+
+.home {
+
+	text-align:center;
+
+	#new-game {
+		height: 80px;
+		width: 160px;
+		border: black 3px solid;
+
+	}
+
+}
+
+.nav {
+	background-color: $fb-blue;
+	color: white;
+	width: 100%;
 	margin: 0 auto;
 }
 
-// Top Nav
-nav.header.navbar-fixed-top{
-  position: static;
-
-	// Hide for mobile
-	@include mobile-only {
-		display: none;
-	}
-}
-nav.navbar.main {
-
-	background-color: none;
-	padding-bottom: 2%;
-
-	#nav-logo {
-		padding-top: 1%;
-	}
-
-	#login{
-    color: #FD7D4B;
-  }
-  #help {
-    color:#FECD40;
-  }
-  #about {
-    color:#20C5C1;
-  }
-
-}
-
-nav.notfixed {
-	position: absolute!important;
-}
-
-// Group view header
-nav.header {
+// Move this once finalized placement
+.reaction {
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: absolute;
+	z-index: 2000;
 	background-color: white;
-  padding-bottom: 1%;
-}
+	display: none;
 
-footer {
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  &.row {
-  	margin: 0px;
-  }
-}
 
-.footer {
-	background-color: white;
-
-	@include mobile-landscape-and-up {
-		font-size: 1.6em;
-	}
-	@include mobile-landscape-and-below {
-		font-size: 1.2em;
-	}
-  
-	strong {
-		color: $color-teal;
+	&.angry {
+		background-image: url("https://res.cloudinary.com/esalling/image/upload/v1491283826/angry-face.gif");
 	}
 
-	.logos-footer {
-		padding: 2%;
-		text-align: center;
-	}
-
-	#tagline {
-		text-align: center;
-		padding: 2% 0px;
-		margin: 0 auto;
+	&.likes {
+		background-image: url("https://res.cloudinary.com/esalling/image/upload/v1491283825/like.gif");
 	}
 }
 
-.left-text {
-	text-align: left;
+
+.page-wrapper {
+	height:100%;
+	margin: 0 auto;
 }
-
-.bold {
-	font-weight: bold;
-}
-
-.orange {
-	background-color: $color-light-orange;
-}
-
-.red {
-	background-color: $color-bright-red;
-}
-
-.blue {
-	background-color: $color-bg-wwdmm;
-}
-
-.black-font {
-    color: black;
-  }
-
-  .white-font {
-  	color: white;
-  }
-
-  .gray-font {
-  	color: darken($color-gray, 30%);
-  }
-  .dark-gray-font {
-  	color: darken($color-gray, 50%);
-  }
-
-.orange-font {
-	color: #ffa76d;
-}
-
-.green-font {
-	color: $color-green;
-}
-
-.red-font {
-	color: $color-red;
-}
-
-.bright-red-font {
-	color: $color-bright-red;
-}
-
-.teal-font {
-	color: $color-teal;
-}
-
-.tweetImg {
-	height: 300px;
-	width: 100%;
-	top: -100px;
-	position: relative;
-}
-
-.clockImg {
-	height: 150px;
-	width: 150px;
-	bottom: -50px;
-	position: relative;
-	@include circle(150px, white);
-}
-
-.game {
-	height: 100%;
-	width: 100%;
-  position: relative;
-  margin: 10px auto;
-  background-color: white;
-  box-shadow: 10px 10px 10px #888888;
-  min-height: 200px;
-}
-
-.game-header {
-	text-align: center;
-	font-size: 4em;
-	font-weight: bold;
-	letter-spacing: -0.06em;
-
-	span {
-		margin: -5px;
-	}
-}
-
-// START Main Content
-#debugging {
-	z-index: 1000;
-}
-
-
 
 #gameContent {
+	width: 100%;
+	height:100%;
+	overflow:hidden;
+	margin: 0 auto;
 
-	// padding: 40px 15px;
-	padding-bottom: 10%;
-  text-align: center;
+	.game, .profile, .feed, .event, .round {
+		height: 100%;
+		width:100%;
+		position: absolute;
+	}
+
+	.profile, .feed, .event, .round {
+		display: none;
+	}
+
+
+	.pre {
+
+		.screen {
+			display:none;
+
+		}
+
+		.rules, .base {
+			// display:none;
+		}
+	}
+
+	.game {
+		text-align: center;
+
+		.modal {
+			height: 100%;
+			width:100%;
+			background-color:white;
+			color: $fb-darkgrey;
+			margin: 0 auto;
+			z-index: 1000;
+			position: absolute;
+			top: 0px;
+		}
+
+		.status {
+			&.Positive {
+				color: green;
+			}
+
+			&.Negative {
+				color: red;
+			}
+
+			&.Neutral {
+				color: yellow;
+			}
+		}
+
+		.screen {
+			img {
+				max-width: 300px;
+				margin: 0 auto;
+			}
+		}
+
+		.profile-group {
+			&.closed {
+				pointer-events: none;
+			}
+		}
+
+		.profile-select {
+			height: 150px;
+			margin: 10px;
+			width: 300px;
+			display: inline-block;
+			border: 1px grey solid;
+			&.selected {
+				border: 2px black solid;
+			}
+
+			h3 {
+				margin: 5px;
+				margin-top: -20px;
+				background: white;
+				padding: 2px;
+				position: relative;
+				color: black;
+			}
+			p {
+				line-height: 1;
+				text-align: left;
+			}
+		}
+
+		// Profile 
+		.profile {
+			z-index: 2000;
+			background: white;
+			line-height: 1;
+
+			.profile-header {
+			    background-repeat: no-repeat;
+			    background-size: 100% 120px;
+			    background-position: top center;
+			    height: 160px;
+			    width: 100%;
+			    p{
+			    	line-height: 1.2;
+			    }
+				img {
+					padding-top: 60px;
+					display: inline-block;
+				}
+
+			}
+
+			.analysis {
+				z-index: 1000;
+			    position: absolute;
+			    bottom: 20px;   
+			}
+
+			.follower-bucket-bar {
+				height:30px;
+				width:300px;
+				margin: 0 auto;
+				display:block;
+
+				.followers {
+					height:100%;
+					display:table-cell;
+					text-align:center;
+					float:left;
+					color: white;
+					font-size: 12px;
+					margin: 5px 0px;
+
+					&.focus {
+						border: 1px black solid;
+					}
+					&.trait {
+						background: $fb-lightblue;
+					}
+					&.opposite {
+						background: $fb-red;
+					}
+					&.neutral {
+						background: $fb-orange;
+					}
+				}
+
+			}
+
+			.loading {
+				height: 150px;
+				width: 100%;
+				background-image: url('https://res.cloudinary.com/esalling/image/upload/v1491786762/fbloader.gif');
+				background-position: center;
+				background-size: 100%;
+			}
+
+			.profile-wrapper {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				height: 100%;
+				max-height: 460px;
+				z-index: 2000;
+
+				.profile-btn {
+					position: absolute;
+					bottom: 0px;
+				}
+
+				&.closed {
+					visibility: none;
+				}
+			}
+
+			#start-round {
+				width: 100%;
+			}
+
+		} // .profile
+
+		// Round event
+		.feed {
+			font-size: 20px;
+
+			.direct-message {
+				position: absolute;
+				bottom: 80px;
+				left: 10px;
+				height: 60px;
+				width: 220px;
+				color: $fb-darkgrey;
+				font-size: 12px;
+				background: $fb-grey;
+				z-index: 1000;
+
+				&.follower {
+					border: 3px solid $fb-blue;
+				}
+
+				&.alien {
+					border: 3px solid $fb-darkgrey;
+				}
+			}
+
+			.fb-footer {
+				display: none;
+				position: absolute;
+				bottom: 0px;
+				width: 100%;
+				max-width: 320px;
+				height: 50px;
+				z-index: 1000;
+				background-color: $fb-grey;
+
+				a {
+					height:60px;
+					width: 30%;
+					display: inline-block;
+					float: left;
+				}
+
+				.points-bar {
+					width: 100%;
+					height: 20px;
+					position: absolute;
+					bottom: 0px;
+					background: darken($fb-grey, 20%);
+					div {
+						height:20px;
+						background: $fb-lightblue;
+					}
+				}
+			}
+
+			// .identity-bar {
+			// 	background: $fb-grey;
+			// 	height: 40px;
+			// 	margin: 10px 0px;
+			// 	width: 100%;
+			// 	z-index: 1000;
+
+			// 	div {
+			// 		background: $fb-blue;
+			// 		height: 40px;
+			// 		margin: 10px 0px;
+			// 		width: 0%;
+			// 	}
+			// }
+
+			.header {
+				background-color: white;
+				color: $fb-blue;
+				z-index: 1000;
+				top: 0px;
+			}
+
+			#new-event {
+				height:100%;
+				width: 425px;
+				position:absolute;
+				z-index: 1000;
+				background-color:white;
+				color: black;
+				text-align:center;
+			}
+
+
+			.post-header {
+				height: 60px;
+				width: 100%;
+
+				.btn {
+					width: 60px;
+					height: 60px;
+					display: inline-block;
+				}
+			}
+
+			.post-feed {
+				height: 100%;
+			}
+
+			.counter {
+				margin: 60px auto;
+				font-size: 34px;
+				line-height: 100px;
+				height: 100px;
+				width: 100px;
+				border: 2px black solid;
+				border-radius: 50px;
+			}
+
+			.instructions {
+				margin-bottom: 20px;
+				font-weight: bold;
+			    padding: 0px 20px;
+			}
+
+			.feed-wrap {
+				height: calc(100% - 20px);
+				margin-top: 0px;
+				overflow: hidden;
+				position:relative;
+			}
+
+			#post-feed {
+				display:none;
+				overflow: scroll;
+				position: absolute;
+				background: white;
+			    height: 100%;
+			    width: 425px;
+			    bottom: 400px;
+			    padding-top: 10px;
+				vertical-align: bottom;
+			}
+
+			.post-body {
+				background-size: contain;
+				background-repeat:no-repeat;
+				background-position: center top;
+			    height: 260px;
+				.headline {
+					position: absolute;
+					right: 0px;
+					bottom: 0px;
+					background-color: white;
+				}
+			}
+
+			.post {
+				background-color:white;
+				color: black;
+				position: absolute;
+				display:block;
+				width: 320px;
+				margin: 0 auto;
+				height: 300px;
+				font-size: 20px;
+				overflow: hidden;
+				z-index:1;
+				border: 3px gray solid;
+
+				
+				.share-btn {
+					position: absolute;
+					bottom:0px;
+					z-index: 1000;
+					left: 20px;
+					top: 5px;
+
+					&:disabled {
+						background-color: black;
+
+					}
+				}
+			}
+
+			.thumbnail {
+				float: left;
+				height: 150px;
+				width: 150px;
+				img {
+					height: 100%;
+					width: 100%
+
+				}
+			}
+
+			#article-slide {
+				height: 80%;
+			}
+
+			.buttons {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+
+				input {
+					background-color:white;
+					color: black;
+				}
+			}
+
+
+		} // .event
+
+		// End of round review
+		.round {
+
+			.header {
+				z-index: 1000;
+				background-color:black;
+				position:relative;
+				font-size: 20px;
+				height: 120px;
+			}
+
+			#round-feed {
+				z-index: 1;
+			}
+			.comment {
+				background-color:white;
+				color: black;
+				position: relative;
+				display:block;
+				width: 425px;
+				margin: 0 auto;
+				height: 120px;
+				font-size: 14px;
+				z-index:1;
+				border: 3px gray solid;
+
+			}
+
+			.thumbnail {
+				float: left;
+				height: 100px;
+				width: 100px;
+
+			}
+		} // .round
+
+
+	}
 
 }
 
-#loading-modal {
-	.indicator {
-		background: rgba(254, 120, 70, .5) url('https://res.cloudinary.com/engagement-lab-home/image/upload/emerging-citizens/images/layout/loading-spinner.svg');
-		position: fixed;
-    width: 100%;
-    height: 100%;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-	}
-}
-.error-modal {
-
-	position: fixed;
-	width: 100%; 
-	height: 100%;
-	text-align: center;
-	overflow-y: scroll;
-
-	#text {
-		top: -100%;
-		@include transition(top, 0.5s, ease-out);
-	}
-
-	@include mobile-only {
-		h1 {
-			font-size: 4em;
-		}
-		h2 {
-			font-size: 2em;
-		}
-	}
-	@include tablet-landscape-and-up {
-		h1 {
-			font-size: 7em;
-		}
-		h2 {
-			font-size: 4em;
-		}
-	}
-}
-// END Main Content

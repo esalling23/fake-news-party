@@ -30,9 +30,9 @@ var GameSession = new keystone.List('GameSession', {
 GameSession.add({
 
   accessCode: { type: String, required: true, initial: true, hidden: true }, 
-  player: {
+  profile: {
   	type: Types.Relationship, 
-  	ref: 'User', 
+  	ref: 'Profile', 
   	many: false
   },
   updated: { type: Date, noedit: true }

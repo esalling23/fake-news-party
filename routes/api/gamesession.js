@@ -21,7 +21,7 @@ var keystone = require('keystone'),
     
 var Game = require(appRoot + '/lib/GameManager'),
     GameData = keystone.list('GameData'),
-    Session = require('learning-games-core').SessionManager,
+    Session = require(appRoot + '/lib/SessionManager'),
     GameSession = keystone.list('GameSession'),
     ContentCategory = keystone.list('ContentCategory'), 
     randomstring = require('randomstring'),
@@ -78,7 +78,10 @@ exports.create = function(req, res) {
             if(session !== null)
                 gameCode = generateCode();
             else {
-                var newSession = new GameSession.model();
+                var newSession = new GameSession.model({
+                    accessCode: gameCode, 
+                    profile: data.profile
+                });
                 // Save this session to memory for faster retrieval (deleted when game ends)
                 Session.Create(gameCode, new Game(newSession));
 

@@ -85,14 +85,18 @@ Profile.schema.statics.removeResourceRef = function(resourceId, callback) {
     Profile.model.update({
             $or: [{
                 'pros': resourceId, 
-                'cons': resourceId
+                'cons': resourceId, 
+                'neutrals': resourceId, 
+                'missions': resourceId
             }]
         },
 
         {
             $pull: {
                 'pros': resourceId, 
-                'cons': resourceId
+                'cons': resourceId, 
+                'neutrals': resourceId, 
+                'missions': resourceId
             }
         },
 

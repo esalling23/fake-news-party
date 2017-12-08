@@ -2,11 +2,13 @@
 
 	<h3>Welcome, {{player.username}}!</h3>
 
+	<p>Now playing as {{profile.name}}</p>
+{{!-- 
 	<div id="levels-wrapper">
 	{{>game/levels}}
-	</div>
+	</div> --}}
 
 	<button class="btn submit" data-event="game:newRound" id="game-newRound">Let's Go!</button>
-	<button class="btn submit" id="rules-btn">Rules</button>
+	{{!-- <button class="btn submit" id="rules-btn">Rules</button> --}}
 
 </div>

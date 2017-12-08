@@ -209,7 +209,7 @@
     });
 
     // Click on profile and open code popup
-    $('body').on('click', '.profile', function(e) {
+    $('body').on('click', '.profile-link', function(e) {
 
     	$('.modal.code-wrapper #profile-name').text(e.target.attributes["data-name"].nodeValue);
 
@@ -265,6 +265,12 @@
 
 			        console.log("connected");
 
+			        $(document).on('click', 'button#game-newRound', function(evt) {
+
+						socket.emit('game:start', { gameId: '{{gameId}}', profile: '{{profile.id}}' });
+
+					});
+
 			        break;
 
 			    case 'game:newProfile': 
@@ -293,7 +299,7 @@
 								$('.profile-wrapper .profile-btn').fadeIn();
 							});
 
-				      		socket.emit('game:newFeed', 'TEST');
+				      		socket.emit('game:newFeed', '{{gameId}}');
 				      		
 				      	});
 
@@ -422,7 +428,7 @@
 						        	var div = document.createElement('div');
 						        	$(div).appendTo($(feed));
 						        	$(div).addClass('reaction angry');
-						        	socket.emit('feed:reaction', { gameId: 'TEST', reaction: 'angry-react' });
+						        	socket.emit('feed:reaction', { gameId: '{{gameId}}', reaction: 'angry-react' });
 						        }
 						    }
 
