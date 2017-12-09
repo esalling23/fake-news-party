@@ -1,6 +1,9 @@
 // Return server object
 serverStart = function() {
-  
+	
+    /* Global accessor for underscore  */
+	_ = require('underscore');
+
   /* Global accessor for logger  */
   logger = require('winston');
 	
@@ -27,11 +30,6 @@ appStart = function(app) {
 	var rootDir = require('app-root-path');
 	var io = require(rootDir + '/sockets/')(appServer);
 
-	if(process.env.NODE_ENV === 'staging')
-		var consolere = require('console-remote-client').connect('console.re','80','emerging-citizens-qa');
-	else
-		console.re = console;
-
 };
 
 module.exports = function(frameworkDir, shared) {
@@ -46,17 +44,6 @@ module.exports = function(frameworkDir, shared) {
 	keystoneInst.set('wysiwyg additional buttons', 'blockquote');
 
 	keystoneInst.set('static', 'public');
-
-  // Enables CORS for play domain on production, for static assets
-	if(process.env.NODE_ENV === 'production') {
-		keystoneInst.set('static options', {
-			'setHeaders': function(res, path) {
-		    res.header("Access-Control-Allow-Origin", "https://ecplay.org");
-		    res.header('Access-Control-Allow-Methods', 'GET, POST');
-		    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-		  }
-		});
-	}
 
 	return { 
 

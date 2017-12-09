@@ -13,7 +13,7 @@
 
 var event;
 var gameId = '{{gameId}}';
-var bottom;
+var top;
 var commentStack;
 var commentFalling;
 
@@ -21,15 +21,16 @@ $(document).on('event:feed', function() {
 
 	var article = parseInt($('#post-feed').find('.post').css('height'));
 
-	$('#post-feed').css('bottom', $('.feed-wrap').height);
+	$('#post-feed').css('bottom', '-' + $('.feed-wrap').height);
+	console.log($('#post-feed').css('bottom'), $('.feed-wrap').height);
 	$('#post-feed').css('height', (($('.post').length * article) + 200) + 'px');
 
-	var bottom = 0;
+	var top = 0;
 
 	_.each($('.post'), function(post){
 
-		$(post).css('bottom', bottom);
-		bottom += article;
+		$(post).css('top', top);
+		top += article;
 
 	});
 
@@ -47,7 +48,7 @@ var StartCommentFeed = function(article){
 
 	var postSteps = [];
 	_.each($('#post-feed .post'), function(post) {
-		postSteps.push(-(parseInt($(post).css('bottom')) + 300));
+		postSteps.push(-(parseInt($(post).css('top')) + 300));
 	});
 
 	var time = postSteps.length * 7000;
