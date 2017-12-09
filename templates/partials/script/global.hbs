@@ -488,11 +488,11 @@
 				        			var chance = (Math.round(Math.random() * 10))%2;			        			
 				        			if (chance == 0) {
 				        				console.log('we can just remove it');
-					        			socket.emit('feed:reaction', { gameId: 'TEST', reaction: eventData.reaction });
+					        			socket.emit('feed:reaction', { gameId: '{{gameId}}', reaction: eventData.reaction });
 						        		$(this).remove();
 						        	} else {
 						        		console.log("extra angry")
-						        		socket.emit('feed:reaction', { gameId: 'TEST', reaction: 'extra-angry' });
+						        		socket.emit('feed:reaction', { gameId: '{{gameId}}', reaction: 'extra-angry' });
 						        		var div = document.createElement('div');
 							        	$(div).appendTo($(feed));
 							        	$(div).addClass('reaction angry');

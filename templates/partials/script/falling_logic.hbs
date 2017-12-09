@@ -75,13 +75,13 @@ var StartCommentFeed = function(article){
 			    		post: $(this).find('.post.past').last().attr('id'),
 			    		shared: false
 			    	};
-				    socket.emit('feed:skip', { gameId: 'TEST', data: data });
+				    socket.emit('feed:skip', { gameId: '{{gameId}}', data: data });
 			    }
 		    }
 		}, 
 	  	complete: function() {
 		  	console.log("round over");
-		  	socket.emit('feed:end', { gameId: 'TEST', data: data });
+		  	socket.emit('feed:end', { gameId: '{{gameId}}', data: data });
 	  	}
 	});
 
@@ -117,7 +117,7 @@ var StartCommentFeed = function(article){
 
 			console.log(data);
 			
-			socket.emit('feed:share', { gameId: 'TEST', data: data });
+			socket.emit('feed:share', { gameId: '{{gameId}}', data: data });
 			
 		}
 		

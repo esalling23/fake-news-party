@@ -43,6 +43,17 @@ module.exports = function(frameworkDir, shared) {
 	keystoneInst.set('module root', appRootPath);
 	keystoneInst.set('wysiwyg additional buttons', 'blockquote');
 
+	  // Enables CORS for play domain on production, for static assets
+	if(process.env.NODE_ENV === 'production') {
+		keystoneInst.set('static options', {
+			'setHeaders': function(res, path) {
+		    res.header("Access-Control-Allow-Origin", "https://ecplay.org");
+		    res.header('Access-Control-Allow-Methods', 'GET, POST');
+		    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+		  }
+		});
+	}
+
 	keystoneInst.set('static', 'public');
 
 	return { 

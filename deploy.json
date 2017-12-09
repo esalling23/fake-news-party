@@ -13,7 +13,7 @@
 
     "sdk-staging" : {
       "user": "node",
-      "host": "165.227.178.153",
+      "host": "138.197.91.236",
       "repo": "https://github.com/esalling23/el-web-sdk.git",
       "ref": "origin/keystonejs-3.0",
       "path": "/srv/framework",
@@ -26,7 +26,7 @@
 
     "staging" : {
       "user": "node",
-      "host": "165.227.178.153",
+      "host": "138.197.91.236",
       "repo": "https://github.com/esalling23/fake-news-party.git",
       "ref": "origin/master",
       "path": "/srv/fake-news-party",

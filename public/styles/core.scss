@@ -2,7 +2,13 @@
 @import "_core/variables";
 @import "_core/mixins";
 @import "_core/functions";
-
+@import "_core/forms";
+@import "_core/player";
+@import "_core/groupview";
+// @import "_core/comingsoon";
+@import "_core/homepage";
+@import "_core/website";
+@import "_core/media";
 @import "_core/platform";
 
 // Use for any elements hidden initilly
@@ -13,7 +19,6 @@
 html, body{
 	height: 100%;
 	width: 100%;
-	overflow: hidden;
 }
 
 // Body
@@ -110,12 +115,10 @@ html, body{
 		display: none;
 	}
 
-
 	.pre {
 
 		.screen {
 			display:none;
-
 		}
 
 		.rules, .base {
@@ -526,3 +529,478 @@ html, body{
 
 }
 
+
+// OLD Main Content
+
+
+html, body {
+	max-height: 100%;	
+	max-width:100%;
+}
+html {
+	height:100%;
+	-webkit-overflow-scrolling: touch;
+}
+
+body {
+	display: none;
+	height:100%;
+	overflow-x: hidden;
+
+}
+
+.container {
+	width: 100% !important;
+	
+	padding: 0px !important;
+}
+
+.landing {
+	.container {
+		height: auto;
+	min-height:75%;
+	}
+}
+
+// Bootstrap override
+.form {
+	min-height: 10%;
+
+	// iOS fixes
+	#btn-submit-code {
+		-webkit-appearance: none;
+		background: white;
+	}
+}
+
+.text.centered {
+	text-align:center;
+}
+
+// Center any column, yay!
+.col-centered {
+  float: none;
+  display: inline-block;
+  margin: 0 auto;
+}
+.col-centered-md {
+	@include tablet-landscape-and-below {
+	  float: none;
+	  margin: 0 auto;
+	}
+}
+.col-centered-sm {
+	@include mobile-landscape-and-below {
+	  float: none;
+	  margin: 0 auto;
+	}
+}
+
+// No padding for column
+.col-no-padding {
+	padding: 0;
+}
+
+// Use for any elements hidden initially
+.hidden-el {
+	visibility: hidden;
+}
+
+.screen-title {
+	font-size: 4em;
+	color: white;
+}
+
+.body.game-bg.player {
+	background-color:white;
+	color: $color-teal;
+}
+
+// Body
+.body {
+  font-family: "Avenir";
+  // background: $background-main, $color-peach;
+	
+	@include mobile-only {
+	  // background-color: #fdae8f;
+	}
+}
+
+#replay, #btn_replay {
+	button {
+		width: 40%;
+		padding:2%;
+
+		@media (max-width:425px){
+			width: auto;
+		}
+	}
+
+}
+
+.body.game-bg {
+	
+  // @include linear_transition(background, 0.5s);
+  
+  overflow-x: hidden;
+
+	&.player {
+		background-image: $background-main;
+
+		#logo_ec {
+			margin-top: -15px;
+			background-color: $color-gray;
+		}
+
+		.entry-footer{
+			background-color: $color-gray;
+			padding: 10px;
+
+			button {
+				background-color: $color-gray;
+			}
+		}
+
+	}
+
+  &.htyi {
+	  background: $background-groupview, $color-peach !important;
+	}
+	&.wikigeeks {
+	  background-image: $background-wiki !important;
+	}
+	&.wwdmm {
+		background-image: $background-wwdmm !important;
+	}
+
+}
+
+
+.body.newgame {
+
+	overflow: visible !important;
+
+  @include linear_transition(background, 0.5s);
+  &.htyi {
+	  background: $background-groupview, $color-peach !important;
+	}
+	&.wikigeeks {
+	  background-image: $background-wiki !important;
+	}
+	&.wwdmm {
+		background-image: $background-wwdmm !important;
+	}
+
+}
+
+.body.player.wikigeeks {
+	  background-image: $background-wiki;
+}
+
+.body.monitor {
+  background: $background-groupview, $color-light-orange;
+  background-size: 35%;
+}
+
+// Modal container
+.modal {
+	display: none;
+	position: absolute;
+	width: 100%; 
+	height: 100%; 
+  z-index: 1999;
+  top: 0;
+	left: 0;
+
+  // Tutorial modal
+  .tutorial {
+		width: 100%; 
+		height: 100%;
+		visibility: hidden;
+
+		#img {			
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    height:100%;
+	    img {
+	    	height:100%;
+	    }
+		}
+		
+		#countdown, #continue {
+	    position: fixed !important; 
+	    bottom: 10%;
+	    right: 4%;
+	    width: 150px;
+	    cursor: pointer;
+	    .icon {
+				display: inline-block;
+				fill: currentColor;
+				width: 1em;
+				height: 1em;
+				margin-top: 22%;
+			}
+			.icon-arrow-right {
+				width: 0.8212890625em;
+			}
+
+	    .text {
+	    	font-size: 8em;
+	    	top: 58% !important;
+	    	color: #fff !important;
+	    }
+		}
+		
+  }
+}
+
+.desktop-only {
+	// Hide for mobile
+	@include mobile-landscape-and-below {
+		display: none;
+	}
+	// @include mobile-portrait-and-below {
+	// 	display: none;
+	// }
+}
+.mobile-only {
+	// Hide for desktop
+	// @include mobile-portrait-and-up {
+	// 	display: none;
+	// }
+	@include mobile-landscape-and-up {
+		display: none;
+	}
+}
+
+// Navbar START
+
+#logo_img {
+	height: 50px;
+	width: 50px;
+	margin: 0 auto;
+}
+
+// Top Nav
+nav.header.navbar-fixed-top{
+  position: static;
+
+	// Hide for mobile
+	@include mobile-only {
+		display: none;
+	}
+}
+nav.navbar.main {
+
+	background-color: none;
+	padding-bottom: 2%;
+
+	#nav-logo {
+		padding-top: 1%;
+	}
+
+	#login{
+    color: #FD7D4B;
+  }
+  #help {
+    color:#FECD40;
+  }
+  #about {
+    color:#20C5C1;
+  }
+
+}
+
+nav.notfixed {
+	position: absolute!important;
+}
+
+// Group view header
+nav.header {
+	background-color: white;
+  padding-bottom: 1%;
+}
+
+footer {
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  &.row {
+  	margin: 0px;
+  }
+}
+
+.footer {
+	background-color: white;
+
+	@include mobile-landscape-and-up {
+		font-size: 1.6em;
+	}
+	@include mobile-landscape-and-below {
+		font-size: 1.2em;
+	}
+  
+	strong {
+		color: $color-teal;
+	}
+
+	.logos-footer {
+		padding: 2%;
+		text-align: center;
+	}
+
+	#tagline {
+		text-align: center;
+		padding: 2% 0px;
+		margin: 0 auto;
+	}
+}
+
+.left-text {
+	text-align: left;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.orange {
+	background-color: $color-light-orange;
+}
+
+.red {
+	background-color: $color-bright-red;
+}
+
+.blue {
+	background-color: $color-bg-wwdmm;
+}
+
+.black-font {
+    color: black;
+  }
+
+  .white-font {
+  	color: white;
+  }
+
+  .gray-font {
+  	color: darken($color-gray, 30%);
+  }
+  .dark-gray-font {
+  	color: darken($color-gray, 50%);
+  }
+
+.orange-font {
+	color: #ffa76d;
+}
+
+.green-font {
+	color: $color-green;
+}
+
+.red-font {
+	color: $color-red;
+}
+
+.bright-red-font {
+	color: $color-bright-red;
+}
+
+.teal-font {
+	color: $color-teal;
+}
+
+.tweetImg {
+	height: 300px;
+	width: 100%;
+	top: -100px;
+	position: relative;
+}
+
+.clockImg {
+	height: 150px;
+	width: 150px;
+	bottom: -50px;
+	position: relative;
+	@include circle(150px, white);
+}
+
+.game {
+	height: 100%;
+	width: 100%;
+  position: relative;
+  margin: 10px auto;
+  background-color: white;
+  box-shadow: 10px 10px 10px #888888;
+  min-height: 200px;
+}
+
+.game-header {
+	text-align: center;
+	font-size: 4em;
+	font-weight: bold;
+	letter-spacing: -0.06em;
+
+	span {
+		margin: -5px;
+	}
+}
+
+// START Main Content
+#debugging {
+	z-index: 1000;
+}
+
+
+
+#gameContent {
+
+	// padding: 40px 15px;
+	padding-bottom: 10%;
+  text-align: center;
+
+}
+
+#loading-modal {
+	.indicator {
+		background: rgba(254, 120, 70, .5) url('https://res.cloudinary.com/engagement-lab-home/image/upload/emerging-citizens/images/layout/loading-spinner.svg');
+		position: fixed;
+    width: 100%;
+    height: 100%;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+	}
+}
+.error-modal {
+
+	position: fixed;
+	width: 100%; 
+	height: 100%;
+	text-align: center;
+	overflow-y: scroll;
+
+	#text {
+		top: -100%;
+		@include transition(top, 0.5s, ease-out);
+	}
+
+	@include mobile-only {
+		h1 {
+			font-size: 4em;
+		}
+		h2 {
+			font-size: 2em;
+		}
+	}
+	@include tablet-landscape-and-up {
+		h1 {
+			font-size: 7em;
+		}
+		h2 {
+			font-size: 4em;
+		}
+	}
+}
+// END Main Content
