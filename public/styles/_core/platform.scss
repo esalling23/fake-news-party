@@ -6,3 +6,18 @@
 	color: white;
 }
 
+#code-modal {
+	height: 300px;
+	width: 400px;
+	background: white;
+	text-align: center;
+	color: $fb-darkgrey;
+	margin: 0 auto;
+	padding: 20px;
+
+	input {
+		border: solid $fb-darkgrey 1px;
+	}
+
+}
+
