@@ -50,6 +50,10 @@ html, body{
 	}
 }
 
+.container, #wrapper {
+	height: 100%;
+}
+
 
 .home {
 
@@ -102,13 +106,11 @@ html, body{
 #gameContent {
 	width: 100%;
 	height:100%;
-	overflow:hidden;
 	margin: 0 auto;
 
 	.game, .profile, .feed, .event, .round {
 		height: 100%;
 		width:100%;
-		position: absolute;
 	}
 
 	.profile, .feed, .event, .round {
@@ -201,13 +203,12 @@ html, body{
 			    background-repeat: no-repeat;
 			    background-size: 100% 120px;
 			    background-position: top center;
-			    height: 160px;
 			    width: 100%;
 			    p{
 			    	line-height: 1.2;
 			    }
 				img {
-					padding-top: 60px;
+					padding: 60px;
 					display: inline-block;
 				}
 
@@ -215,8 +216,10 @@ html, body{
 
 			.analysis {
 				z-index: 1000;
-			    position: absolute;
-			    bottom: 20px;   
+
+				.hashtag {
+					display: inline;
+				}
 			}
 
 			.follower-bucket-bar {
@@ -259,12 +262,13 @@ html, body{
 			}
 
 			.profile-wrapper {
-				position: absolute;
 				left: 0px;
 				top: 0px;
 				height: 100%;
 				max-height: 460px;
 				z-index: 2000;
+				margin: 0 auto;
+				max-width: 500px;
 
 				.profile-btn {
 					position: absolute;
@@ -323,7 +327,7 @@ html, body{
 					float: left;
 				}
 
-				.points-bar {
+				.reputation-bar {
 					width: 100%;
 					height: 20px;
 					position: absolute;
@@ -373,9 +377,13 @@ html, body{
 				height: 60px;
 				width: 100%;
 
+				.user * {
+					display:inline;
+				}
+
 				.btn {
-					width: 60px;
-					height: 60px;
+					width: auto;
+					height: 30px;
 					display: inline-block;
 				}
 			}
@@ -424,38 +432,66 @@ html, body{
 				background-position: center top;
 			    height: 260px;
 				.headline {
-					position: absolute;
-					right: 0px;
-					bottom: 0px;
 					background-color: white;
+					text-align: left;
 				}
 			}
 
 			.post {
 				background-color:white;
 				color: black;
-				position: absolute;
 				display:block;
-				width: 320px;
+				width: 420px;
 				margin: 0 auto;
-				height: 300px;
+				height: 160px;
 				font-size: 20px;
 				overflow: hidden;
 				z-index:1;
 				border: 3px gray solid;
 
+				display: inline-grid;
+
+				grid-template-rows: 60px 60px 40px;
+
+				.row {
+					margin: 0px;
+				}
+
+
+				.description {
+					font-size: 14px;
+					padding: 5px;
+					text-align: left;
+
+				}
+
+				@include transition(height, 0.2s, ease-out);
 				
 				.share-btn {
-					position: absolute;
-					bottom:0px;
 					z-index: 1000;
-					left: 20px;
-					top: 5px;
 
 					&:disabled {
 						background-color: black;
 
 					}
+				}
+
+				&.open-post {
+					height: 400px;
+
+					grid-template-rows: 60px 60px 240px 40px;
+				}
+
+				.post-extra {
+					display: none;
+				}
+
+				.tag-btn {
+					position: absolute;
+				}
+
+				.tag-options {
+					
 				}
 			}
 
@@ -545,7 +581,6 @@ html {
 body {
 	display: none;
 	height:100%;
-	overflow-x: hidden;
 
 }
 

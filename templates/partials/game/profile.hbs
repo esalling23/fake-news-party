@@ -21,20 +21,28 @@
 
 		<p>These are {{currentProfile.name}}'s leanings, broken down for you:<p>
 
-		Likes:
+		{{!-- {{{jsonPrint currentProfile}}} --}}
+
+		<h3><strong>Likes:</strong></h3> 
 		{{#each currentProfile.pros}}
 
+		<p class="likes hashtag">#{{name}}</p>
+
 		{{/each}}
 
-		Dislikes: 
+		<h3><strong>Dislikes:</strong></h3> 
 		{{#each currentProfile.cons}}
 
-		{{/each}}
+		<p class="dislikes hashtag">#{{name}}</p>
 
-		Nuetrals: 
+		{{/each}}
+		
+		{{!-- <p><strong>Nuetrals:</strong></p>
 		{{#each currentProfile.neutrals}}
 
-		{{/each}}
+		<p class="neutrals">#{{name}}</p>
+
+		{{/each}} --}}
 
 
 		<h3>Once you're ready, go ahead and click start</h3>

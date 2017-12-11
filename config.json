@@ -4,6 +4,8 @@
 	"database": "group-party-game",
 	"subdomain": "ec",
 	"admin_nav": { 
-						
-					}
+					"Home Page": ["Index"], 
+					"Game Content": ["Profile", "Scenario", "Event", "Article", "Hashtag", "TimeSpan", "NewsType"], 
+					"Game Config": ["GameConfig"]
+				}
 }

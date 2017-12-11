@@ -28,17 +28,13 @@
  GameConfig.add({
 
     name: { type: String }, 
+
+    defProfPic: { type: Types.CloudinaryImage, label: 'Default Profile Picture for Articles', folder: 'FakeNews/Config'}, 
     rounds: { type: Number, label: 'Round Cap'}
      
 });
 
- GameConfig.schema.pre('save', function(next) {
-
-     this.name = this.name.toUpperCase();
-
-     next();
-
- });
+ 
  /**
   * Registration
   */

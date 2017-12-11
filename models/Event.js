@@ -54,15 +54,13 @@ Event.schema.statics.removeResourceRef = function(resourceId, callback) {
 
     Event.model.update({
             $or: [{
-                'lovers': resourceId, 
-                'haters': resourceId
+                'articles': resourceId
             }]
         },
 
         {
             $pull: {
-                'haters': resourceId,
-                'lovers': resourceId
+                'articles': resourceId
             }
         },
 

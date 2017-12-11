@@ -1,9 +1,66 @@
+
+// Mission Selection
+
+.platform {
+
+	.nav-tabs {
+		.nav-item a {
+			color: $fb-grey;
+			&:hover, &:active {
+				background: $fb-grey;
+				color: $fb-blue;
+				border-radius: 0px;
+
+			}
+		}
+		
+	}
+
+	.tab-content {
+		padding-top: 20px;
+	}
+}
+.timespan-wrap {
+	margin: 40px auto;
+}
+
 .timespan, .decade-block {
 	width: 200px;
-	height: 100px;
 	border: 1px solid black;
 	background: lighten($fb-blue, 10%);
 	color: white;
+	display: inline-grid;
+	margin: 10px;
+
+	@include transition(all, 0.2s, ease-out);
+
+}
+
+.timespan {
+	height: 100px;
+
+	&:hover, &:focus, &:active {
+		background: $fb-blue;
+		cursor: pointer;
+	}
+}
+
+.decade-block {
+
+	height: 200px;
+	grid-template-rows: 30px 170px;
+
+	h3 {
+		margin-top: 5px;
+	}
+
+	.profile-link {
+		padding: 4px;
+		&:hover, &:focus, &:active {
+			background: $fb-blue;
+			cursor: pointer;
+		}
+	}
 }
 
 #code-modal {
@@ -18,6 +75,13 @@
 	input {
 		border: solid $fb-darkgrey 1px;
 	}
+}
 
+.login-wrap {
+	height: 300px;
+	width: 500px;
+	background: white;
+	margin: 0 auto;
+	position: fixed;
 }
 

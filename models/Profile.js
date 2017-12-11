@@ -34,8 +34,8 @@ var Profile = new keystone.List('Profile',
 Profile.add({
 
 	name: { type: String, label: 'Profile Name', hidden: true },
-	cover: { type: Types.CloudinaryImage, label: 'Cover Photo' },
-	image: { type: Types.CloudinaryImage, label: 'Profile Image' },
+	cover: { type: Types.CloudinaryImage, label: 'Cover Photo', folder: 'FakeNews/Profiles' },
+	image: { type: Types.CloudinaryImage, label: 'Profile Image', folder: 'FakeNews/Profiles' },
 	bio: { type: Types.Markdown, label: 'Profile About Bio'},
 
 	alienMessage: { type: Types.Markdown, label: 'Initial message from the Aliens about understanding of this human' },

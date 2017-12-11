@@ -47,7 +47,7 @@ module.exports = function(frameworkDir, shared) {
 	if(process.env.NODE_ENV === 'production') {
 		keystoneInst.set('static options', {
 			'setHeaders': function(res, path) {
-		    res.header("Access-Control-Allow-Origin", "https://ecplay.org");
+		    res.header("Access-Control-Allow-Origin", "https://alienidentity.net");
 		    res.header('Access-Control-Allow-Methods', 'GET, POST');
 		    res.header("Access-Control-Allow-Headers", "X-Requested-With");
 		  }

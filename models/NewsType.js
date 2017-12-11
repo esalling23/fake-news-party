@@ -35,9 +35,7 @@ var NewsType = new keystone.List('NewsType',
  */
 NewsType.add({
 
-	name: { type: String, label: 'Headline', required: true, initial: true },
-	
-	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
+	name: { type: String, label: 'Headline', required: true, initial: true }
 
 });
 

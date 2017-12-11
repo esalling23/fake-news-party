@@ -1,0 +1,74 @@
+<div class="feed-wrap">
+	<div id="post-feed" style="display:none">
+
+		{{#each articles}}
+
+			<div class="post" id="{{this.key}}">
+
+				<div class="post-header row">
+					<div class="user col-sm-8">
+
+						<img class="profile-image" src="{{cloudinaryUrl /v1492992566/Fake-news/genericfriendicon.png height="50" width="50"}}">
+						<div class="profile-name">{{this.user}} in {{this.location}}</div>
+
+					</div>
+
+					<div class="col-sm-4">
+						<button class="btn submit share-btn">SHARE</button>
+						<button class="btn submit ignore-btn">IGNORE</button>
+
+					</div>
+				</div>
+
+				<div class="post-body row">
+
+					<img class="post-image col-sm-4" src="{{cloudinaryUrl this.cover.secure_url height="100" width="100"}}">
+
+					<div class="headline col-sm-8">{{this.name}}</div>
+
+				</div>
+
+				<div class="post-extra">
+
+					<div class="description row">{{{this.description.html}}}</div>
+
+					<div class="row">
+
+						<div class="likes col-sm-4">{{this.likes}}</div>
+
+						<div class="source col-sm-8">Source: {{this.source}}</div>
+
+					</div>
+
+					<div class="comment-text row">
+						{{#each this.comments}}{{this}}{{/each}}
+					</div>
+
+				</div>
+
+				<div class="post-footer row">
+
+					<button class="btn submit tag-btn">Tag News</button>
+
+					<ul class="tag-options" style="display: none">
+
+						{{#each ../newsTypes}}
+
+							<li>{{name}}</li>
+
+						{{/each}}
+
+					</ul>
+
+				</div>
+
+			</div>
+
+		{{/each}}
+
+		<div class="loading"></div>
+
+	</div>
+</div>
+
+

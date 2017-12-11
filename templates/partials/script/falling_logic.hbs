@@ -16,13 +16,18 @@ var gameId = '{{gameId}}';
 var top;
 var commentStack;
 var commentFalling;
+var length;
+var time;
+var postSteps = [];
+var postPastId;
 
 $(document).on('event:feed', function() {
 
 	var article = parseInt($('#post-feed').find('.post').css('height'));
+	var feedStart = $('.feed-wrap').height();
 
-	$('#post-feed').css('bottom', '-' + $('.feed-wrap').height);
-	console.log($('#post-feed').css('bottom'), $('.feed-wrap').height);
+	$('#post-feed').css('bottom', -feedStart/2 );
+
 	$('#post-feed').css('height', (($('.post').length * article) + 200) + 'px');
 
 	var top = 0;
@@ -39,24 +44,10 @@ $(document).on('event:feed', function() {
 
 });
 
-var StartCommentFeed = function(article){
+function FeedAnimate(feed, length, time) {
 
-	console.log("startnig events");
-	var length = '-' + $('.post').length * article + 'px';
-
-	$('#post-feed').show();
-
-	var postSteps = [];
-	_.each($('#post-feed .post'), function(post) {
-		postSteps.push(-(parseInt($(post).css('top')) + 300));
-	});
-
-	var time = postSteps.length * 7000;
-
-	var postPastId;
-
-	$('#post-feed').animate({
-	    bottom: length
+	feed.animate({
+	    bottom: feed.height()
 	}, {
 		easing: 'linear',
 		duration: time,
@@ -65,64 +56,130 @@ var StartCommentFeed = function(article){
 		},
 	  	step: function( now, fx ) {
 
-		    if( postSteps[0] == Math.round(now) ){
+			if( postSteps[0] == Math.round( now ) ){
 			    postSteps.shift();
-			    postPastId = $(this).find('.post:not(.past)').first().attr('id');
-			    $('#' + postPastId).addClass('past');
+			    postPastId = feed.find('.post:not(.pass)').first().attr('id');
+			    $('#' + postPastId).addClass('pass');
 
 			    if (!$('#' + postPastId).hasClass('shared')){
 			    	var data = {
-			    		post: $(this).find('.post.past').last().attr('id'),
+			    		post: postPastId,
 			    		shared: false
 			    	};
 				    socket.emit('feed:skip', { gameId: '{{gameId}}', data: data });
 			    }
 		    }
+
+		    length--;		    
 		}, 
 	  	complete: function() {
 		  	console.log("round over");
-		  	socket.emit('feed:end', { gameId: '{{gameId}}', data: data });
+			socket.emit('feed:end', { gameId: '{{gameId}}', data: data });
 	  	}
 	});
 
-	// pause/resume feed
-	$(".profile-btn").on('click', function() {
+}
 
-		if ($(this).hasClass('animating')) {
-			$(".profile-btn").toggleClass('stopped').toggleClass('animating');
-			$("#post-feed").pause();
-		} else if ($(this).hasClass('stopped')) {
-			$(".profile-btn").toggleClass('stopped').toggleClass('animating');
-			$("#post-feed").resume();
-		} 
-	    
+var StartCommentFeed = function(article) {
+
+	$('#post-feed').show();
+
+	var feedStart = $('.feed-wrap').height();
+
+	var postCount;
+
+	_.each($('#post-feed .post'), function(post, index) {
+		postCount = index + 1;
+		postSteps.push(feedStart/2 + article * postCount);
 	});
 
-	// Comment Logic
-	$('.post .share-btn').on('click', function(){
+	time = (postSteps.length + 2) * 8000;
 
-		if ($(this).parent('.post').hasClass('shared')){
-
-			return;
-
-		} else {
-
-			$(this).closest('.post').addClass('shared');
-			$(this).prop("disabled", true);
-
-			var data = {
-				post: $(this).closest('.post').attr('id'), 
-				shared: true
-			};
-
-			console.log(data);
-			
-			socket.emit('feed:share', { gameId: '{{gameId}}', data: data });
-			
-		}
-		
-
-	});
+	FeedAnimate($('#post-feed'), $('.feed-wrap').height(), time);
 
 }
+
+// Open Post
+$('body').on('click', '.post', function(){
+	var postId = $(this).attr('id');
+	$('#post-feed').stop(true);
+	$(this).addClass('open-post');
+	$(this).find('.post-extra').fadeIn();
+
+	setTimeout(function() {
+		time += 2000;
+		
+		FeedAnimate($('#post-feed'), $('.feed-wrap').height(), time);
+		$('#' + postId).removeClass('open-post');
+
+		$('#' + postId).find('.post-extra').fadeOut();
+
+	}, 2000)
+});
+
+// Open Bio
+$('body').on('click', '.profile-btn', function() {
+
+	if ($(this).hasClass('animating')) {
+		$(".profile-btn").toggleClass('stopped').toggleClass('animating');
+		$('#post-feed').pause()
+	} else if ($(this).hasClass('stopped')) {
+		$(".profile-btn").toggleClass('stopped').toggleClass('animating');
+		$('#post-feed').resume();
+	} 
+    
+});
+
+
+// Share Logic
+$('body').on('click', '.post .share-btn', function(e){
+
+	e.stopPropagation(true);
+	e.bubbles = false;
+	e.stopImmediatePropagation();
+
+	if ($(this).parent('.post').hasClass('shared'))
+		return;
+	else {
+		$(this).closest('.post').addClass('shared');
+		$(this).prop("disabled", true);
+
+		var data = {
+			post: $(this).closest('.post').attr('id'), 
+			shared: true
+		};
+
+		console.log(data);
+		
+		socket.emit('feed:share', { gameId: '{{gameId}}', data: data });
+		
+	}
+});
+
+// Tag Logic
+$('body').on('mouseover', '.post .tag-btn', function(e){
+	$('.tag-options').fadeIn();
+});
+
+$('body').on('mouseout', '.post .tag-btn', function(e){
+	$('.tag-options').fadeOut();
+});
+
+// Click on profile and open code popup
+$('body').on('click', '.tag', function(e) {
+
+	e.stopPropagation(true);
+	e.bubbles = false;
+	e.stopImmediatePropagation();
+
+	var data = {
+		tag: $(this).attr('id')
+	};
+
+	console.log(data);
+
+	socket.emit('feed:tag', { gameId: '{{gameId}}', data: data });
+
+
+});
 

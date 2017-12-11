@@ -1,20 +1,59 @@
-<div class="post-feed">
+<div class="post-feed col-sm-6">
 
-	{{> game/commenting}}
+	{{> game/posts}}
 
 </div>
 
-<div class="direct-message alien" style="display:none;">
+<div class="dashboard col-sm-6">
 
-	<div class="body"></div>
+	<div class="trending">
+
+	{{#each events}}
+
+		<img src="{{{cloudinaryUrl config.trendingImg width="80" height="80"}}}">
+		<h3>{{name}}</h3>
+		<p>{{description}}</p>
+
+	{{/each}}
+
+	</div>
+
+	<div class="messaging">
+
+	Profile Breakdown: 
+
+	<img src="{{{cloudinaryUrl currentProfile.image width="80" height="80"}}}"><p><strong>{{currentProfile.name}}</strong></p>
+
+	{{{currentProfile.bio.html}}}
+
+	<p><strong>Likes:</strong></p> 
+	{{#each currentProfile.pros}}
+
+	<p>{{name}}</p>
+
+	{{/each}}
+
+	<p><strong>Dislikes:</strong></p> 
+	{{#each currentProfile.cons}}
+
+	<p>{{name}}</p>
+
+	{{/each}}
+
+	<p><strong>Nuetrals:</strong></p>
+	{{#each currentProfile.neutrals}}
+
+	<p>{{name}}</p>
+
+	{{/each}}
+
+	</div>
 
 </div>
 
 <div class="fb-footer">
 
-	<a class="profile-btn">Profile</a>
-
-	<div class="points-bar" data-start="{{pointCount}}"><div style="width:50%"></div></div>
+	<div class="reputation-bar" data-start="100"><div style="width:50%"></div></div>
 
 </div>
 

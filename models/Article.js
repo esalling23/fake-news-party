@@ -36,29 +36,26 @@ var Article = new keystone.List('Article',
 Article.add({
 
 	name: { type: String, label: 'Headline', required: true, initial: true },
-	user: { type: String, label: 'Username', note: 'This could be a fake username, a real individual\'s name, or a company/brand/group'},
-	thumbnail: { type: Types.CloudinaryImage, label: 'User Thumbnail Image' },
-	cover: { type: Types.CloudinaryImage, label: 'Post Cover Photo'},
+	user: { type: String, label: 'Username', note: 'This could be a fake username, a real individual\'s name, or a company/brand/group' },
+	thumbnail: { type: Types.CloudinaryImage, label: 'User Thumbnail Image', folder: 'FakeNews/Articles' },
+	location: { type: String, label: 'User Location' },
+	cover: { type: Types.CloudinaryImage, label: 'Post Cover Photo', folder: 'FakeNews/Articles' },
 	comments: { type: Types.TextArray, label:'Potential Comments' },
+	source: { type: String, label: 'Source' },
+	description: { type: Types.Markdown, label: 'Article Description' },
 	types: { 
 		type: Types.Relationship, 
 		label: 'Type of News', 
 		ref: 'NewsType', 
 		many: true
 	}, 
-	debunked : { type: Types.TextArray, label: 'Debunked messages', dependsOn: {'fake': true}},
-	pros: { 
+	// debunked : { type: Types.TextArray, label: 'Debunked messages', dependsOn: { 'fake': true } },
+	hashtags: { 
 		type: Types.Relationship, 
 		label: 'Pro Hashtags', 
 		ref: 'Hashtag', 
 		many: true
 	}, 
-	cons: { 
-		type: Types.Relationship, 
-		label: 'Con Hashtags', 
-		ref: 'Hashtag', 
-		many: true
-	},
 	createdAt: { type: Date, default: Date.now, noedit: true, hidden: true }
 
 });
@@ -67,16 +64,14 @@ Article.schema.statics.removeResourceRef = function(resourceId, callback) {
 
     Article.model.update({
             $or: [{
-                'pros': resourceId, 
-                'cons': resourceId, 
+                'hashtags': resourceId, 
                 'types': resourceId
             }]
         },
 
         {
             $pull: {
-                'pros': resourceId,
-                'cons': resourceId, 
+                'hashtags': resourceId, 
                 'types': resourceId
             }
         },

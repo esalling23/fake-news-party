@@ -21,15 +21,7 @@ var Types = keystone.Field.Types;
 var Hashtag = new keystone.List('Hashtag');
 
 Hashtag.add({
-	name: { type: String, label: 'Hashtag', required: true, initial: true, index: true },
-	// category: {
- //        type: Types.Relationship,
- //        ref: 'ContentCategory',
- //        label: 'Category',
- //        required: true,
- //        initial: true,
- //        many: true
- //    }
+	name: { type: String, label: 'Hashtag', required: true, initial: true, index: true }
 });
 
 /**
