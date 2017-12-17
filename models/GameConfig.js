@@ -30,6 +30,8 @@
     name: { type: String }, 
 
     defProfPic: { type: Types.CloudinaryImage, label: 'Default Profile Picture for Articles', folder: 'FakeNews/Config'}, 
+    trendingImg: { type: Types.CloudinaryImage, label: 'Image for Trending Events', folder: 'FakeNews/Config'}, 
+
     rounds: { type: Number, label: 'Round Cap'}
      
 });

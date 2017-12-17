@@ -160,6 +160,11 @@
 
   	// Login Popup Button Handler
     $('#teacher-entry, #student-entry').on('click', function(e) {
+
+    	e.stopPropagation(true);
+		e.bubbles = false;
+		e.stopImmediatePropagation();
+
     	var data = {};
     	role = e.target.id.replace('-welcome', '');
 
@@ -173,7 +178,12 @@
     });
 
     // Login/Signup Button Handler
-    $('body').on('click', '#login', function(){
+    $('body').on('click', '#login', function(e){
+
+    	e.stopPropagation(true);
+		e.bubbles = false;
+		e.stopImmediatePropagation();
+
 		var data = role;
 
     	$.get( 
@@ -191,6 +201,11 @@
     // When Clicking on a timespan block, it should fade away and show its broken down blocks (ie. 1800 would break down into 1800, 1820, 1840, 1860, 1880)
     // There should be an API call to get the playable characters for each time section
     $('body').on('click', '.timespan', function(e) {
+
+    	e.stopPropagation(true);
+		e.bubbles = false;
+		e.stopImmediatePropagation();
+
     	$('.timespan-wrap').fadeOut();
 
     	var data = {
@@ -211,6 +226,10 @@
     // Click on profile and open code popup
     $('body').on('click', '.profile-link', function(e) {
 
+    	e.stopPropagation(true);
+		e.bubbles = false;
+		e.stopImmediatePropagation();
+
     	$('.modal.code-wrapper #profile-name').text(e.target.attributes["data-name"].nodeValue);
 
     	chosenProfile = e.target.attributes["id"].nodeValue;
@@ -221,6 +240,10 @@
 
     // Start Playing as Character - with or without class
     $('body').on('click', '#start-game', function(e) {
+
+    	e.stopPropagation(true);
+		e.bubbles = false;
+		e.stopImmediatePropagation();
 
     	var pkg = {
     		profile: chosenProfile, 
@@ -265,7 +288,11 @@
 
 			        console.log("connected");
 
-			        $(document).on('click', 'button#game-newRound', function(evt) {
+			        $(document).on('click', 'button#game-newRound', function(e) {
+
+			        	e.stopPropagation(true);
+						e.bubbles = false;
+						e.stopImmediatePropagation();
 
 						socket.emit('game:start', { gameId: '{{gameId}}', profile: '{{profile.id}}' });
 
@@ -293,7 +320,11 @@
 
 						}, 500);
 
-						$('#start-round').on('click', function() {
+						$('#start-round').on('click', function(e) {
+
+							e.stopPropagation(true);
+							e.bubbles = false;
+							e.stopImmediatePropagation();
 
 							$('#analysis').fadeOut(function(){
 								$('.profile-wrapper .profile-btn').fadeIn();

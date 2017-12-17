@@ -85,3 +85,52 @@
 	position: fixed;
 }
 
+.hashtag {
+	display: inline;
+}
+
+.tag-btn {
+	right: 0px;
+}
+
+.tag-options {
+	background: white;
+	list-style-type: none;
+	text-align:left;
+	position: absolute;
+	z-index: 1000000;
+	right: -40px;
+
+	li {
+		font-size: 14px;
+	}
+}
+
+.dashboard {
+
+	.trending {
+		border: 2px solid $fb-blue;
+
+		.trending-event {
+			display: block;
+
+			img, h3 {
+				display: inline;
+				font-size: 14px;
+			}
+
+			p {
+				display: block;
+				font-size: 12px;
+			}
+		}
+	}
+
+	.messaging {
+		.bio {
+			font-size: 14px;
+			text-align: left;
+
+		}
+	}
+}

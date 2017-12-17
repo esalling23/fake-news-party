@@ -156,13 +156,36 @@ $('body').on('click', '.post .share-btn', function(e){
 	}
 });
 
-// Tag Logic
-$('body').on('mouseover', '.post .tag-btn', function(e){
-	$('.tag-options').fadeIn();
+
+// Ignore Logic
+$('body').on('click', '.ignore-btn', function(e) {
+
+	e.stopPropagation(true);
+	e.bubbles = false;
+	e.stopImmediatePropagation();
+
+	var data = {
+		tag: $(this).attr('id')
+	};
+
+	console.log(data);
+
+	socket.emit('feed:tag', { gameId: '{{gameId}}', data: data });
+
+
 });
 
-$('body').on('mouseout', '.post .tag-btn', function(e){
-	$('.tag-options').fadeOut();
+// Tag Logic
+$('body').on('click mouseenter mouseleave', '.post .tag-btn', function(e){
+
+	e.stopPropagation(true);
+	e.bubbles = false;
+	e.stopImmediatePropagation();
+
+	if ($('.tag-options').css('display') == "none")
+		$(this).siblings('.tag-options').fadeIn();
+	else 
+		$(this).siblings('.tag-options').fadeOut();
 });
 
 // Click on profile and open code popup

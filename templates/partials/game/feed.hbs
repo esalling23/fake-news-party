@@ -9,10 +9,13 @@
 	<div class="trending">
 
 	{{#each events}}
+		<div class="trending-event">
 
-		<img src="{{{cloudinaryUrl config.trendingImg width="80" height="80"}}}">
-		<h3>{{name}}</h3>
-		<p>{{description}}</p>
+			<img src="{{{cloudinaryUrl config.trendingImg width="80" height="80"}}}">
+			<h3>{{name}}</h3>
+			<p>{{description}}</p>
+
+		</div>
 
 	{{/each}}
 
@@ -20,32 +23,32 @@
 
 	<div class="messaging">
 
-	Profile Breakdown: 
+		<h3>Profile Breakdown: </h3>
 
-	<img src="{{{cloudinaryUrl currentProfile.image width="80" height="80"}}}"><p><strong>{{currentProfile.name}}</strong></p>
+		<img src="{{{cloudinaryUrl currentProfile.image width="80" height="80"}}}"><p><strong>{{currentProfile.name}}</strong></p>
 
-	{{{currentProfile.bio.html}}}
+		<div class="bio">{{{currentProfile.bio.html}}}</div>
 
-	<p><strong>Likes:</strong></p> 
-	{{#each currentProfile.pros}}
+		<p><strong>Likes:</strong></p> 
+		{{#each currentProfile.pros}}
 
-	<p>{{name}}</p>
+		<p class="hashtag">{{name}}</p>
 
-	{{/each}}
+		{{/each}}
 
-	<p><strong>Dislikes:</strong></p> 
-	{{#each currentProfile.cons}}
+		<p><strong>Dislikes:</strong></p> 
+		{{#each currentProfile.cons}}
 
-	<p>{{name}}</p>
+		<p class="hashtag">{{name}}</p>
 
-	{{/each}}
+		{{/each}}
 
-	<p><strong>Nuetrals:</strong></p>
-	{{#each currentProfile.neutrals}}
+		<p><strong>Nuetrals:</strong></p>
+		{{#each currentProfile.neutrals}}
 
-	<p>{{name}}</p>
+		<p class="hashtag">{{name}}</p>
 
-	{{/each}}
+		{{/each}}
 
 	</div>
 

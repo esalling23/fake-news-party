@@ -217,9 +217,7 @@ html, body{
 			.analysis {
 				z-index: 1000;
 
-				.hashtag {
-					display: inline;
-				}
+				
 			}
 
 			.follower-bucket-bar {
@@ -376,6 +374,7 @@ html, body{
 			.post-header {
 				height: 60px;
 				width: 100%;
+				font-size: 14px;
 
 				.user * {
 					display:inline;
@@ -417,7 +416,6 @@ html, body{
 
 			#post-feed {
 				display:none;
-				overflow: scroll;
 				position: absolute;
 				background: white;
 			    height: 100%;
