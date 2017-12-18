@@ -287,6 +287,9 @@ html, body{
 		// Round event
 		.feed {
 			font-size: 20px;
+			display: grid;
+		    grid-template-columns: 50% 50%;
+		    grid-template-rows: 80% 20%;
 
 			.direct-message {
 				position: absolute;
@@ -313,8 +316,7 @@ html, body{
 				position: absolute;
 				bottom: 0px;
 				width: 100%;
-				max-width: 320px;
-				height: 50px;
+				height: 150px;
 				z-index: 1000;
 				background-color: $fb-grey;
 
@@ -325,16 +327,18 @@ html, body{
 					float: left;
 				}
 
-				.reputation-bar {
-					width: 100%;
-					height: 20px;
-					position: absolute;
-					bottom: 0px;
-					background: darken($fb-grey, 20%);
-					div {
-						height:20px;
-						background: $fb-lightblue;
-					}
+			}
+
+			
+			.reputation-bar {
+				width: 100%;
+				height: 20px;
+				position: absolute;
+				bottom: 0px;
+				background: darken($fb-grey, 20%);
+				div {
+					height:20px;
+					background: $fb-lightblue;
 				}
 			}
 
@@ -376,14 +380,18 @@ html, body{
 				width: 100%;
 				font-size: 14px;
 
-				.user * {
-					display:inline;
+				.profile-image, .profile-name {
+					display: inline;
+
 				}
 
 				.btn {
 					width: auto;
-					height: 30px;
-					display: inline-block;
+				    display: inline;
+				    font-size: 12px;
+				    padding: 2px;
+				    margin-top: 5px;
+				    line-height: 1;
 				}
 			}
 
@@ -425,10 +433,11 @@ html, body{
 			}
 
 			.post-body {
-				background-size: contain;
-				background-repeat:no-repeat;
-				background-position: center top;
-			    height: 260px;
+
+			    .post-image {
+			    	padding: 0px;
+			    }
+
 				.headline {
 					background-color: white;
 					text-align: left;
@@ -447,20 +456,15 @@ html, body{
 				z-index:1;
 				border: 3px gray solid;
 
-				display: inline-grid;
-
-				grid-template-rows: 60px 60px 40px;
-
 				.row {
 					margin: 0px;
 				}
-
 
 				.description {
 					font-size: 14px;
 					padding: 5px;
 					text-align: left;
-
+					line-height: 1;
 				}
 
 				@include transition(height, 0.2s, ease-out);
@@ -482,6 +486,10 @@ html, body{
 
 				.post-extra {
 					display: none;
+
+					.source, .likes {
+						font-size: 12px;
+					}
 				}
 
 				.tag-btn {
@@ -493,10 +501,16 @@ html, body{
 				}
 			}
 
+			.post-footer {
+				font-size: 12px;
+
+			}
+
 			.thumbnail {
 				float: left;
 				height: 150px;
 				width: 150px;
+
 				img {
 					height: 100%;
 					width: 100%
@@ -989,9 +1003,6 @@ footer {
 
 
 #gameContent {
-
-	// padding: 40px 15px;
-	padding-bottom: 10%;
   text-align: center;
 
 }

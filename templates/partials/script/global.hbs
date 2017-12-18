@@ -23,6 +23,14 @@
 	var role;
 	var chosenProfile;
 
+
+var StopPropagation = function(e) {
+	e.stopPropagation(true);
+	e.bubbles = false;
+	e.stopImmediatePropagation();
+}
+
+
  $(document).ready(function() {
 
 	var timeline = new TimelineLite();
@@ -161,9 +169,7 @@
   	// Login Popup Button Handler
     $('#teacher-entry, #student-entry').on('click', function(e) {
 
-    	e.stopPropagation(true);
-		e.bubbles = false;
-		e.stopImmediatePropagation();
+    	StopPropagation(e);
 
     	var data = {};
     	role = e.target.id.replace('-welcome', '');
@@ -180,9 +186,7 @@
     // Login/Signup Button Handler
     $('body').on('click', '#login', function(e){
 
-    	e.stopPropagation(true);
-		e.bubbles = false;
-		e.stopImmediatePropagation();
+    	StopPropagation(e);
 
 		var data = role;
 
@@ -202,9 +206,7 @@
     // There should be an API call to get the playable characters for each time section
     $('body').on('click', '.timespan', function(e) {
 
-    	e.stopPropagation(true);
-		e.bubbles = false;
-		e.stopImmediatePropagation();
+    	StopPropagation(e);
 
     	$('.timespan-wrap').fadeOut();
 
@@ -226,9 +228,7 @@
     // Click on profile and open code popup
     $('body').on('click', '.profile-link', function(e) {
 
-    	e.stopPropagation(true);
-		e.bubbles = false;
-		e.stopImmediatePropagation();
+    	StopPropagation(e);
 
     	$('.modal.code-wrapper #profile-name').text(e.target.attributes["data-name"].nodeValue);
 
@@ -241,9 +241,7 @@
     // Start Playing as Character - with or without class
     $('body').on('click', '#start-game', function(e) {
 
-    	e.stopPropagation(true);
-		e.bubbles = false;
-		e.stopImmediatePropagation();
+    	StopPropagation(e);
 
     	var pkg = {
     		profile: chosenProfile, 
@@ -290,9 +288,7 @@
 
 			        $(document).on('click', 'button#game-newRound', function(e) {
 
-			        	e.stopPropagation(true);
-						e.bubbles = false;
-						e.stopImmediatePropagation();
+			        	StopPropagation(e);
 
 						socket.emit('game:start', { gameId: '{{gameId}}', profile: '{{profile.id}}' });
 
@@ -322,9 +318,7 @@
 
 						$('#start-round').on('click', function(e) {
 
-							e.stopPropagation(true);
-							e.bubbles = false;
-							e.stopImmediatePropagation();
+							StopPropagation(e);
 
 							$('#analysis').fadeOut(function(){
 								$('.profile-wrapper .profile-btn').fadeIn();
@@ -386,23 +380,22 @@
 
 			        console.log(eventData.msg);
 
+			        alert(eventData.msg);
+
 			        break;
 
 			    case 'feed:update':
 
-			    	// Double the starting number to get to 100%
-			    	// Divide that by current reputation to get %
-				    bar = eventData.reputation;
-				    console.log($('.reputation-bar').data('start'), eventData.reputation)
-					bar = bar.toString();
+			    	// Based on their points out of 100, now let it be worth 25% of the grade
+			    	var base = $('.reputation-bar').data('start');
+				    bar = base + eventData.reactions;
+
+				    console.log($('.reputation-bar').data('start'), eventData.reactions)
 
 			        var feed = $('.post-feed');
 
-			        var likesCount = 0, 
-			        	angryCount = 0;	
-
 			        $({ countNum: $('.reputation-bar div').text() })
-					.animate({ countNum: eventData.reputation },
+					.animate({ countNum: bar },
 					{ 
 					    duration: 500,
 					    easing:'linear',
@@ -434,113 +427,12 @@
 				        });
 			        }
 
-			        if (eventData.reactions) {
-
-			        	// Check for type of response
-			        	likesCount = _.where(eventData.reactions, "positive").length;
-			        	angryCount = _.where(eventData.reactions, "negative").length;
-
-				        // Generate angry reactions
-				        for ( var i = 0; i < angryCount; i++ ) {
-				        	var div = document.createElement('div');
-				        	$(div).appendTo($(feed));
-				        	$(div).addClass('reaction angry');
-				        	socket.emit('feed:reaction', { gameId: '{{gameId}}', reaction: 'angry-react' });
-				        }
-
-				        // Generate likes
-				        for ( var i = 0; i < likesCount; i++ ) {
-				        	console.log(i);
-				        	var div = document.createElement('div');
-				        	$(div).appendTo($(feed));
-				        	$(div).addClass('reaction likes');
-				        }
-
-					}		
-
-			    	var reaction = $('.post-feed .reaction:not(.animating)');
-
-			        _.each(reaction, function(icn, index) {
-
-			        	// Give each reaction a random position
-			        	var left = (Math.random() * 40);
-			        	$(icn).css('top', '100%');
-			        	$(icn).css('left', left + 'px');
-
-			        	// Fade those suckers in one at a time
-			        	setTimeout(function(){
-
-			        		$(icn).fadeIn(function(){
-
-			        			$(this).addClass('animating');
-
-			        			var destroy = function() {
-					        		console.log("hiding")
-					        		setTimeout(function(){
-					        			$(icn).fadeOut(function(){
-					        				$(this).remove();
-					        			});
-					        		}, 1000);
-					        	};
-
-			        			TweenLite.to($(this), 7, {
-					        		top: '0%', 
-					        		ease: Bounce.easeOut,
-					        		onComplete: destroy
-					        	});
-
-
-			        		});
-
-			        	}, 800 * index);
-		        		
-			        });
-
-			        $('.reaction').on('click', function() {
-		        		console.log("click")
-		        		if ($(this).hasClass('angry')) {
-
-		        			var chance = (Math.round(Math.random() * 10))%2;			        			
-		        			if (chance == 0) {
-		        				console.log('we can just remove it');
-			        			socket.emit('feed:reaction', { gameId: '{{gameId}}', reaction: eventData.reaction });
-				        		$(this).remove();
-				        	} else {
-				        		console.log("extra angry")
-				        		socket.emit('feed:reaction', { gameId: '{{gameId}}', reaction: 'extra-angry' });
-				        		var div = document.createElement('div');
-					        	$(div).appendTo($(feed));
-					        	$(div).addClass('reaction angry');
-					        	$(div).fadeIn(function(){
-					        		$(this).addClass('animating')
-					        		$(this).on('click', function(){
-					        			$(this).remove();
-					        		});
-					        	});
-
-					        	var destroy = function() {
-					        		console.log("hiding")
-					        		setTimeout(function(){
-					        			$(div).fadeOut(function(){
-					        				$(this).remove();
-					        			});
-					        		}, 500);
-					        	};
-
-					        	TweenLite.to($(div), 7, {
-					        		top: '0%', 
-					        		ease: Bounce.easeOut,
-					        		onComplete: destroy
-					        	});
-				        	}
-				        	
-		        		}
-	        			
-		        	});
+			        
 			        
 			        break;
 
 			    case 'feed:response':
+			    
 			    	console.log(eventData, " repsonse")
 
 			    	// Player got a message, let's show them

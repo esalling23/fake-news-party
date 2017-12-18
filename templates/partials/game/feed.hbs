@@ -1,62 +1,91 @@
-<div class="post-feed col-sm-6">
+<div class="post-feed">
 
 	{{> game/posts}}
 
 </div>
 
-<div class="dashboard col-sm-6">
+<div class="dashboard">
 
-	<div class="trending">
+	<div class="followers row">
+
+		<div class="reputation-bar" data-start="100"><div style="width:50%"></div></div>
+
+	</div>
+
+	<div class="spyStatus row">
+
+		<div class="status-bar" data-start="100"><div style="width:50%"></div></div>
+
+	</div>
+
+	<div class="trending row">
 
 	{{#each events}}
 		<div class="trending-event">
 
-			<img src="{{{cloudinaryUrl config.trendingImg width="80" height="80"}}}">
+			<img src="{{{cloudinaryUrl ../config.trendingImg width="80" height="80"}}}">
 			<h3>{{name}}</h3>
 			<p>{{description}}</p>
 
 		</div>
-
 	{{/each}}
 
 	</div>
 
-	<div class="messaging">
+	<div class="recently-tagged row">
 
-		<h3>Profile Breakdown: </h3>
-
-		<img src="{{{cloudinaryUrl currentProfile.image width="80" height="80"}}}"><p><strong>{{currentProfile.name}}</strong></p>
-
-		<div class="bio">{{{currentProfile.bio.html}}}</div>
-
-		<p><strong>Likes:</strong></p> 
-		{{#each currentProfile.pros}}
-
-		<p class="hashtag">{{name}}</p>
-
-		{{/each}}
-
-		<p><strong>Dislikes:</strong></p> 
-		{{#each currentProfile.cons}}
-
-		<p class="hashtag">{{name}}</p>
-
-		{{/each}}
-
-		<p><strong>Nuetrals:</strong></p>
-		{{#each currentProfile.neutrals}}
-
-		<p class="hashtag">{{name}}</p>
-
-		{{/each}}
+		<div class="post-tagged"></div>
 
 	</div>
 
+	
 </div>
 
-<div class="fb-footer">
+<div class="fb-footer row">
 
-	<div class="reputation-bar" data-start="100"><div style="width:50%"></div></div>
+	<div class="breakdown">
+
+		<div class="profile-info col-sm-4">
+			<img src="{{{cloudinaryUrl currentProfile.image width="80" height="80"}}}">
+			<p><strong>{{currentProfile.name}}</strong></p>
+		</div>
+
+		<div class="bio col-sm-4">
+			{{{currentProfile.bio.html}}}
+		</div>
+
+		<div class="followers col-sm-4">
+
+			<h4><strong>Likes:</strong></h4> 
+			{{#each currentProfile.pros}}
+
+			<p class="hashtag">{{name}}</p>
+
+			{{/each}}
+
+			<br>
+
+			<h4><strong>Dislikes:</strong></h4> 
+			{{#each currentProfile.cons}}
+
+			<p class="hashtag">{{name}}</p>
+
+			{{/each}}
+
+			<br>
+
+			<h4><strong>Nuetrals:</strong></h4>
+			{{#each currentProfile.neutrals}}
+
+			<p class="hashtag">{{name}}</p>
+
+			{{/each}}
+
+		</div>
+
+	</div>
+
+
 
 </div>
 

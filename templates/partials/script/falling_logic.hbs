@@ -64,7 +64,8 @@ function FeedAnimate(feed, length, time) {
 			    if (!$('#' + postPastId).hasClass('shared')){
 			    	var data = {
 			    		post: postPastId,
-			    		shared: false
+			    		status: 'passed', 
+			    		tag: $('#' + postPastId).data('tag')
 			    	};
 				    socket.emit('feed:skip', { gameId: '{{gameId}}', data: data });
 			    }
@@ -100,7 +101,10 @@ var StartCommentFeed = function(article) {
 }
 
 // Open Post
-$('body').on('click', '.post', function(){
+$('body').on('click', '.post', function(e){
+
+	StopPropagation(e);
+
 	var postId = $(this).attr('id');
 	$('#post-feed').stop(true);
 	$(this).addClass('open-post');
@@ -112,13 +116,16 @@ $('body').on('click', '.post', function(){
 		FeedAnimate($('#post-feed'), $('.feed-wrap').height(), time);
 		$('#' + postId).removeClass('open-post');
 
+
 		$('#' + postId).find('.post-extra').fadeOut();
 
 	}, 2000)
 });
 
 // Open Bio
-$('body').on('click', '.profile-btn', function() {
+$('body').on('click', '.profile-btn', function(e) {
+
+	StopPropagation(e);
 
 	if ($(this).hasClass('animating')) {
 		$(".profile-btn").toggleClass('stopped').toggleClass('animating');
@@ -134,9 +141,7 @@ $('body').on('click', '.profile-btn', function() {
 // Share Logic
 $('body').on('click', '.post .share-btn', function(e){
 
-	e.stopPropagation(true);
-	e.bubbles = false;
-	e.stopImmediatePropagation();
+	StopPropagation(e);
 
 	if ($(this).parent('.post').hasClass('shared'))
 		return;
@@ -146,7 +151,8 @@ $('body').on('click', '.post .share-btn', function(e){
 
 		var data = {
 			post: $(this).closest('.post').attr('id'), 
-			shared: true
+			status: 'shared', 
+			tag: $('#' + postPastId).data('tag')
 		};
 
 		console.log(data);
@@ -160,27 +166,29 @@ $('body').on('click', '.post .share-btn', function(e){
 // Ignore Logic
 $('body').on('click', '.ignore-btn', function(e) {
 
-	e.stopPropagation(true);
-	e.bubbles = false;
-	e.stopImmediatePropagation();
+	StopPropagation(e);
+
+	var post = $(this).closest('.post');
+
+	post.hide();
 
 	var data = {
-		tag: $(this).attr('id')
+		post: post.attr('id'),
+		status: 'ignored', 
+		tag: $('#' + postPastId).data('tag')
 	};
 
 	console.log(data);
 
-	socket.emit('feed:tag', { gameId: '{{gameId}}', data: data });
+	socket.emit('feed:share', { gameId: '{{gameId}}', data: data });
 
 
 });
 
 // Tag Logic
-$('body').on('click mouseenter mouseleave', '.post .tag-btn', function(e){
+$('body').on('mouseenter', '.post', function(e){
 
-	e.stopPropagation(true);
-	e.bubbles = false;
-	e.stopImmediatePropagation();
+	StopPropagation(e);
 
 	if ($('.tag-options').css('display') == "none")
 		$(this).siblings('.tag-options').fadeIn();
@@ -191,9 +199,9 @@ $('body').on('click mouseenter mouseleave', '.post .tag-btn', function(e){
 // Click on profile and open code popup
 $('body').on('click', '.tag', function(e) {
 
-	e.stopPropagation(true);
-	e.bubbles = false;
-	e.stopImmediatePropagation();
+	StopPropagation(e);
+
+	$(this).closest('.post').data('tag', $(this).attr('id'));
 
 	var data = {
 		tag: $(this).attr('id')

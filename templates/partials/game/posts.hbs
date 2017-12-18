@@ -8,7 +8,7 @@
 				<div class="post-header row">
 					<div class="user col-sm-8">
 
-						<img class="profile-image" src="{{cloudinaryUrl /v1492992566/Fake-news/genericfriendicon.png height="50" width="50"}}">
+						<img class="profile-image" style="height:50px; width: 50px" src="{{../config.defProfPic.url}}">
 						<div class="profile-name">{{this.user}} in {{this.location}}</div>
 
 					</div>
@@ -21,7 +21,7 @@
 
 				<div class="post-body row">
 
-					<img class="post-image col-sm-4" src="{{cloudinaryUrl this.cover.secure_url height="100" width="100"}}">
+					<img class="post-image col-sm-4" style="height:100px; width: 100px;" src="{{this.cover.url}}">
 
 					<div class="headline col-sm-8">{{this.name}}</div>
 
@@ -33,7 +33,7 @@
 
 					<div class="row">
 
-						<div class="likes col-sm-4">{{this.likes}}</div>
+						<div class="likes col-sm-4">Likes: 0{{this.likes}}</div>
 
 						<div class="source col-sm-8">Source: {{this.source}}</div>
 
@@ -43,21 +43,21 @@
 						{{#each this.comments}}{{this}}{{/each}}
 					</div>
 
-				</div>
+					<div class="post-footer row">
 
-				<div class="post-footer row">
+						<p>Tag Options:</p>
 
-					<button class="btn submit tag-btn">Tag News</button>
+						<ul class="tag-options">
 
-					<ul class="tag-options" style="display: none">
+							{{#each ../newsTypes}}
 
-						{{#each ../newsTypes}}
+								<li>{{name}}</li>
 
-							<li>{{name}}</li>
+							{{/each}}
 
-						{{/each}}
+						</ul>
 
-					</ul>
+					</div>
 
 				</div>
 

@@ -94,19 +94,30 @@
 }
 
 .tag-options {
-	background: white;
+	// background: white;
 	list-style-type: none;
 	text-align:left;
-	position: absolute;
-	z-index: 1000000;
-	right: -40px;
+	// position: absolute;
+	// z-index: 1000000;
+	// right: -40px;
 
 	li {
 		font-size: 14px;
+		border: 2px solid $fb-blue;
+		border-radius: 5px;
+	    padding: 5px;
+	    display: inline;
 	}
 }
 
+.base {
+	max-width: 50%;
+	margin: 0 auto;
+}
 .dashboard {
+	height: 100%;
+	display: grid;
+	grid-template-rows: 25%;
 
 	.trending {
 		border: 2px solid $fb-blue;
@@ -125,12 +136,18 @@
 			}
 		}
 	}
+}
 
-	.messaging {
-		.bio {
-			font-size: 14px;
-			text-align: left;
+.breakdown {
+	// display: grid;
+	// grid-template-columns: 25%;
+	
+	* {
+		display:inline;
+	}
+	.bio {
+		font-size: 14px;
+		text-align: left;
 
-		}
 	}
 }
