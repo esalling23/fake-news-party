@@ -26,18 +26,18 @@ $(document).on('event:feed', function() {
 	var article = parseInt($('#post-feed').find('.post').css('height'));
 	var feedStart = $('.feed-wrap').height();
 
-	$('#post-feed').css('bottom', -feedStart/2 );
+	$('#post-feed').css('bottom', feedStart/-3 + "px" );
 
-	$('#post-feed').css('height', (($('.post').length * article) + 200) + 'px');
+	$('#post-feed').css('height', $('.post').length * article + 'px');
 
-	var top = 0;
+	var top = 200;
 
 	_.each($('.post'), function(post){
-
-		$(post).css('top', top);
+		postSteps.push(top);
 		top += article;
-
 	});
+
+	console.log(postSteps, " are the steps");
 
 	// Call comments animation logic	
 	StartCommentFeed(article);	
@@ -55,18 +55,24 @@ function FeedAnimate(feed, length, time) {
 			$('.fb-footer .profile-btn, .profile-wrapper .profile-btn').addClass('animating');
 		},
 	  	step: function( now, fx ) {
-
+	  		{{!-- console.log(now); --}}
 			if( postSteps[0] == Math.round( now ) ){
 			    postSteps.shift();
 			    postPastId = feed.find('.post:not(.pass)').first().attr('id');
 			    $('#' + postPastId).addClass('pass');
 
-			    if (!$('#' + postPastId).hasClass('shared')){
+			    console.log(postPastId, " is the post that has passed");
+
+			    if (!$('#' + postPastId).hasClass('shared') && !$('#' + postPastId).hasClass('ignored')) {
+
+			    	console.log(postPastId, " was passed and not shared or ignored");
+
 			    	var data = {
 			    		post: postPastId,
 			    		status: 'passed', 
 			    		tag: $('#' + postPastId).data('tag')
 			    	};
+
 				    socket.emit('feed:skip', { gameId: '{{gameId}}', data: data });
 			    }
 		    }
@@ -84,17 +90,17 @@ function FeedAnimate(feed, length, time) {
 var StartCommentFeed = function(article) {
 
 	$('#post-feed').show();
-
-	var feedStart = $('.feed-wrap').height();
-
+{{!-- 
+	var feedStart = $('.feed-wrap').height(); --}}
+{{!-- 
 	var postCount;
 
 	_.each($('#post-feed .post'), function(post, index) {
 		postCount = index + 1;
 		postSteps.push(feedStart/2 + article * postCount);
-	});
+	}); --}}
 
-	time = (postSteps.length + 2) * 8000;
+	time = (postSteps.length + 2) * 5000;
 
 	FeedAnimate($('#post-feed'), $('.feed-wrap').height(), time);
 
@@ -111,7 +117,7 @@ $('body').on('click', '.post', function(e){
 	$(this).find('.post-extra').fadeIn();
 
 	setTimeout(function() {
-		time += 2000;
+		time += 4000;
 		
 		FeedAnimate($('#post-feed'), $('.feed-wrap').height(), time);
 		$('#' + postId).removeClass('open-post');
@@ -119,7 +125,7 @@ $('body').on('click', '.post', function(e){
 
 		$('#' + postId).find('.post-extra').fadeOut();
 
-	}, 2000)
+	}, 4000)
 });
 
 // Open Bio
@@ -170,6 +176,9 @@ $('body').on('click', '.ignore-btn', function(e) {
 
 	var post = $(this).closest('.post');
 
+	if (post.hasClass('shared'))
+		return;
+
 	post.hide();
 
 	var data = {
@@ -182,11 +191,10 @@ $('body').on('click', '.ignore-btn', function(e) {
 
 	socket.emit('feed:share', { gameId: '{{gameId}}', data: data });
 
-
 });
 
 // Tag Logic
-$('body').on('mouseenter', '.post', function(e){
+{{!-- $('body').on('mouseenter', '.post', function(e){
 
 	StopPropagation(e);
 
@@ -194,7 +202,7 @@ $('body').on('mouseenter', '.post', function(e){
 		$(this).siblings('.tag-options').fadeIn();
 	else 
 		$(this).siblings('.tag-options').fadeOut();
-});
+}); --}}
 
 // Click on profile and open code popup
 $('body').on('click', '.tag', function(e) {
@@ -204,7 +212,8 @@ $('body').on('click', '.tag', function(e) {
 	$(this).closest('.post').data('tag', $(this).attr('id'));
 
 	var data = {
-		tag: $(this).attr('id')
+		tag: $(this).attr('id'), 
+		post: $(this).closest('.post').attr('id')
 	};
 
 	console.log(data);

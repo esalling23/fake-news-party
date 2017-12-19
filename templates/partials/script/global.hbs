@@ -387,10 +387,9 @@ var StopPropagation = function(e) {
 			    case 'feed:update':
 
 			    	// Based on their points out of 100, now let it be worth 25% of the grade
-			    	var base = $('.reputation-bar').data('start');
-				    bar = base + eventData.reactions;
+				    bar = eventData.reaction;
 
-				    console.log($('.reputation-bar').data('start'), eventData.reactions)
+				    console.log($('.reputation-bar').data('start'), eventData.reaction)
 
 			        var feed = $('.post-feed');
 
@@ -427,9 +426,56 @@ var StopPropagation = function(e) {
 				        });
 			        }
 
-			        
+			        // CheckFollowerSatisfaction()
+			        switch (bar) {
+
+						case (bar >= 95):
+							// Thrilled
+							$('.follower-image').attr('src', "/images/thrilled.png");
+							break;
+
+						case (bar < 95):
+							// Happy
+							$('.follower-image').attr('src', "/images/happy.png");
+							break;
+
+						case (bar < 80):
+							// Interested
+							$('.follower-image').attr('src', "/images/interested.png");
+							break;
+
+						case (bar < 70):
+							// Bored
+							$('.follower-image').attr('src', "/images/neutral.png");
+							break;
+
+						case (bar < 50):
+							// Suspicious
+							$('.follower-image').attr('src', "/images/bored.png");
+							break;
+
+						case (bar < 40):
+							// Suspicious
+							$('.follower-image').attr('src', "/images/suspicious.png");
+							break;
+
+						case (bar < 30):
+							// Unfollowing
+							$('.follower-image').attr('src', "/images/unfollowing.png");
+							break;
+					}
+			       
 			        
 			        break;
+
+			    case 'feed:tagged':
+
+			    	if (eventData.status)  {
+			    		// Tagged correctly
+			    		
+			    	}
+
+			    	break;
 
 			    case 'feed:response':
 			    

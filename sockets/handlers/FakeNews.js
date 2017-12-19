@@ -62,12 +62,12 @@ var Common = function (nsp, socket) {
 
         },
 
-        // 'feed:skip': function(package) {
+        'feed:tag': function(package) {
 
-        //     Session.Get(package.gameId).
-        //     CheckPost(currentSpace, package.data);
+            Session.Get(package.gameId).
+            CheckTag(currentSpace, package.data);
 
-        // },
+        },
 
         'feed:skip': function(package) {
 
