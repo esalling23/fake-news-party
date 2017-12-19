@@ -14,8 +14,11 @@
 	</div>
 
 	<div class="spyStatus row">
-	<h5>Spy Status:</h5>
-		<div class="status-bar" data-start="100"><div style="width:50%"></div></div>
+	<h5>Messages:</h5>
+		{{!-- <div class="status-bar" data-start="100"><div style="width:50%"></div></div> --}}
+		<div class="direct-message" style="display:none;">
+
+		</div>
 
 	</div>
 
@@ -24,9 +27,9 @@
 	{{#each events}}
 		<div class="trending-event">
 
-			<img src="{{{cloudinaryUrl ../config.trendingImg width="80" height="80"}}}">
+			<img src="{{{cloudinaryUrl ../config.trendingImg width="40" height="40"}}}">
 			<h3>{{name}}</h3>
-			<p>{{description}}</p>
+			{{{trendingDescription.html}}}
 
 		</div>
 	{{/each}}

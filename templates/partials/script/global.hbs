@@ -427,45 +427,31 @@ var StopPropagation = function(e) {
 			        }
 
 			        // CheckFollowerSatisfaction()
-			        switch (bar) {
-
-						case (bar >= 95):
-							// Thrilled
-							$('.follower-image').attr('src', "/images/thrilled.png");
-							break;
-
-						case (bar < 95):
-							// Happy
-							$('.follower-image').attr('src', "/images/happy.png");
-							break;
-
-						case (bar < 80):
-							// Interested
-							$('.follower-image').attr('src', "/images/interested.png");
-							break;
-
-						case (bar < 70):
-							// Bored
-							$('.follower-image').attr('src', "/images/neutral.png");
-							break;
-
-						case (bar < 50):
-							// Suspicious
-							$('.follower-image').attr('src', "/images/bored.png");
-							break;
-
-						case (bar < 40):
-							// Suspicious
-							$('.follower-image').attr('src', "/images/suspicious.png");
-							break;
-
-						case (bar < 30):
+			        	if (bar <= 30){
 							// Unfollowing
 							$('.follower-image').attr('src', "/images/unfollowing.png");
-							break;
-					}
-			       
-			        
+			        	} else if (bar <= 40){
+			        		// Suspicious
+							$('.follower-image').attr('src', "/images/suspicious.png");
+			        	} else if (bar <= 50){
+			        		// Bored
+							$('.follower-image').attr('src', "/images/bored.png");
+			        	} else if (bar <= 70) {
+			        		// Neutral
+							$('.follower-image').attr('src', "/images/neutral.png");
+			        	} else if (bar <= 80) {
+			        		// Interested
+							$('.follower-image').attr('src', "/images/interested.png");
+			        	} else if (bar <= 95) {
+			        		// Happy
+							$('.follower-image').attr('src', "/images/happy.png");
+			        	} else if (bar >= 95) {
+			        		// Thrilled
+							$('.follower-image').attr('src', "/images/thrilled.png");
+			        	} else {
+			        		console.log("there's no face for this!");
+			        	}
+									        
 			        break;
 
 			    case 'feed:tagged':
@@ -482,9 +468,8 @@ var StopPropagation = function(e) {
 			    	console.log(eventData, " repsonse")
 
 			    	// Player got a message, let's show them
-				    var message = $('.direct-message');
-				    message.addClass(eventData.comment);
-			    	message.find('.body').text(eventData.msg);
+				    var message = $('.spyStatus .direct-message');
+			    	message.html('<p>' + eventData.comment + '</p>');
 			    	message.fadeIn(function(){
 			    		setTimeout(function(){
 			    			message.fadeOut(function(){

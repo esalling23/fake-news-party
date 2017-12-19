@@ -107,6 +107,12 @@
 		border-radius: 5px;
 	    padding: 5px;
 	    display: inline;
+
+	    &:hover, &:focus, &:active {
+			background: $fb-blue;
+			color: white;
+			cursor: pointer;
+		}
 	}
 }
 
@@ -119,11 +125,18 @@
 	display: grid;
 	grid-template-rows: 25%;
 
+	.row {
+		margin: 0px;
+	}
+
 	.trending {
 		border: 2px solid $fb-blue;
 
 		.trending-event {
 			display: block;
+			text-align: left;
+			padding-left: 10px;
+			padding-right: 10px;
 
 			img, h3 {
 				display: inline;
@@ -133,6 +146,9 @@
 			p {
 				display: block;
 				font-size: 12px;
+				padding-left: 40px;
+				margin: 0px;
+
 			}
 		}
 	}

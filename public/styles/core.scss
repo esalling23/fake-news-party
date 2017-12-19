@@ -292,9 +292,10 @@ html, body{
 		    grid-template-rows: 80% 20%;
 
 			.direct-message {
-				position: absolute;
-				bottom: 80px;
-				left: 10px;
+				text-align: center;
+				margin: 0 auto;
+				border: 1px solid black;
+				border-radius: 4px;
 				height: 60px;
 				width: 220px;
 				color: $fb-darkgrey;
@@ -487,6 +488,8 @@ html, body{
 
 					.source, .likes, .comment-text {
 						font-size: 12px;
+						line-height: 1;
+						text-align: left;
 					}
 				}
 

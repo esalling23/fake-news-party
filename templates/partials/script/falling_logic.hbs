@@ -24,13 +24,20 @@ var postPastId;
 $(document).on('event:feed', function() {
 
 	var article = parseInt($('#post-feed').find('.post').css('height'));
-	var feedStart = $('.feed-wrap').height();
-
-	$('#post-feed').css('bottom', feedStart/-3 + "px" );
-
 	$('#post-feed').css('height', $('.post').length * article + 'px');
 
-	var top = 200;
+	var feedStart = $('.feed-wrap').height()/2 - $('#post-feed').height();
+
+	console.log(feedStart);
+
+	if (feedStart > 0)
+		feedStart = -feedStart;
+
+	console.log(feedStart);
+
+	$('#post-feed').css('bottom', feedStart + "px" );
+
+	var top = feedStart + $('.feed-wrap').height()/2;
 
 	_.each($('.post'), function(post){
 		postSteps.push(top);
@@ -100,7 +107,7 @@ var StartCommentFeed = function(article) {
 		postSteps.push(feedStart/2 + article * postCount);
 	}); --}}
 
-	time = (postSteps.length + 2) * 5000;
+	time = (postSteps.length + 2) * 7000;
 
 	FeedAnimate($('#post-feed'), $('.feed-wrap').height(), time);
 

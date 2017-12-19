@@ -8,7 +8,7 @@
 				<div class="post-header row">
 					<div class="user col-sm-8">
 
-						<img class="profile-image" style="height:50px; width: 50px" src="{{../config.defProfPic.url}}">
+						<img class="profile-image" style="height:30px; width: 30px" src="{{../config.defProfPic.url}}">
 						<div class="profile-name">{{this.user}} in {{this.location}}</div>
 
 					</div>
@@ -21,7 +21,7 @@
 
 				<div class="post-body row">
 
-					<img class="post-image col-sm-4" style="height:100px; width: 100px;" src="{{this.cover.url}}">
+					<img class="post-image col-sm-4" style="height:50px; width: auto;" src="{{this.cover.url}}">
 
 					<div class="headline col-sm-8">{{this.name}}</div>
 
@@ -40,7 +40,7 @@
 					</div>
 
 					<div class="comment-text row">
-						{{#each this.comments}}{{this}}{{/each}}
+						{{#each this.comments}}<p><img class="profile-image" style="height:20px; width: 20px; padding: 2px;" src="{{../config.defProfPic.url}}">{{this}}</p>{{/each}}
 					</div>
 
 					<div class="post-footer row">
